@@ -1,2 +1,2 @@
-##QVITE 
-the modern finance tracker app.
+## QVITE 
+the sleek finance tracker

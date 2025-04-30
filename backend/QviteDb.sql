@@ -29,7 +29,7 @@ CREATE TABLE budget (
 CREATE TABLE account (
     accountId  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     accountBalance INT NOT NULL,
-    accountTransactionId INT NOT NULL,
+    accountTransactionId INT,
     FOREIGN KEY (accountId) REFERENCES budget(budgetId) ON DELETE CASCADE
 );
 

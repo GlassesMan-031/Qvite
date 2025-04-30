@@ -1,5 +1,6 @@
 const connectionMySQL = require("./../connectionMySQL");
 
+// Retrieves account details
 function getAccount(id) {
   return new Promise((resolve, reject) => {
     let sql = "SELECT * FROM account WHERE accountId = ?";
@@ -11,6 +12,7 @@ function getAccount(id) {
   });
 }
 
+// retrieves all accounts
 function createAccount(accountBalance) {
   return new Promise((resolve, reject) => {
     let sql = "INSERT INTO account (accountBalance, ) VALUES (?)";
@@ -23,6 +25,7 @@ function createAccount(accountBalance) {
   });
 }
 
+// Updates the account balance
 function updateAccountBalance(accountBalance, accountId) {
   return new Promise((resolve, reject) => {
     let sql =
@@ -36,6 +39,7 @@ function updateAccountBalance(accountBalance, accountId) {
   });
 }
 
+// Deletes a transaction from the account
 function deleteTransaction(id) {
   return new Promise((resolve, reject) => {
     let sql = "DELETE FROM account WHERE transactionId = ?";

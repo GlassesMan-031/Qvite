@@ -12,7 +12,9 @@ app.use(cors());
 app.use(express.static("public"));
 
 const userRoutes = require("./routes/userRoutes");
+const accountRoutes = require("./routes/accountRoutes");
 
 app.use(userRoutes);
+app.use(accountRoutes);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

@@ -31,11 +31,7 @@ exports.createAccount = async (req, res) => {
   const { accountBalance } = req.body;
 
   try {
-    await accountService.createAccount(
-      accountBalance,
-      transactionsId,
-      accountId
-    );
+    await accountService.createAccount(accountBalance);
     return res.status(201).json({
       success: true,
       error: "",

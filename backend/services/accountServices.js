@@ -13,7 +13,7 @@ function getAccount(id) {
 
 function createAccount(accountBalance) {
   return new Promise((resolve, reject) => {
-    let sql = "INSERT INTO account (accountBalance, ) VALUES (?)";
+    let sql = "INSERT INTO account (accountBalance ) VALUES (?)";
     let params = [accountBalance];
 
     connectionMySQL.query(sql, params, (err) => {

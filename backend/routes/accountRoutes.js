@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const accountController = require("../controllers/accountControler");
+const accountController = require("../controllers/accountController");
 
 router.get("/api/account", accountController.getAccount);
 router.get("/api/account/:id", accountController.getAccount);

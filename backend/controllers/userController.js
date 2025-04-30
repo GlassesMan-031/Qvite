@@ -2,15 +2,15 @@ const userService = require("./../services/userService");
 
 // CREATE USER
 exports.createUser = async (req, res) => {
-  const { userName, userPassword, userEmail } = req.body;
+  const { usersName, usersPassword, usersEmail } = req.body;
 
   if (
-    !userName ||
-    userName.trim().length < 1 ||
-    !userPassword ||
-    userPassword.trim().length < 1 ||
-    !userEmail ||
-    userEmail.trim().length < 1
+    !usersName ||
+    usersName.trim().length < 1 ||
+    !usersPassword ||
+    usersPassword.trim().length < 1 ||
+    !usersEmail ||
+    usersEmail.trim().length < 1
   ) {
     return res.status(400).json({
       success: false,
@@ -19,7 +19,7 @@ exports.createUser = async (req, res) => {
   }
 
   try {
-    await userService.createUser(userName, userPassword, userEmail);
+    await userService.createUser(usersName, usersPassword, usersEmail);
     return res.status(201).json({
       success: true,
       error: "",

@@ -1,11 +1,11 @@
 const connectionMySQL = require("../connectionMySQL");
 
 // CREATE
-function createUser(userName, userPassword, userEmail) {
+function createUser(usersName, usersPassword, usersEmail) {
   return new Promise((resolve, reject) => {
     let sql =
-      "INSERT INTO users (userName, userPassword, userEmail) VALUES (?,?,?)";
-    let params = [userName, userPassword, userEmail];
+      "INSERT INTO users (usersName, usersPassword, usersEmail) VALUES (?,?,?)";
+    let params = [usersName, usersPassword, usersEmail];
 
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);
@@ -17,7 +17,7 @@ function createUser(userName, userPassword, userEmail) {
 // READ
 function getUsers() {
   return new Promise((resolve, reject) => {
-    let sql = "SELECT userName FROM users";
+    let sql = "SELECT * FROM users";
     connectionMySQL.query(sql, (err, rows) => {
       if (err) reject(err);
       else resolve(rows);
@@ -36,13 +36,13 @@ function getUser() {
 }
 
 // UPDATE USER
-function updateUser(userName, userPassword, userEmail, userId) {
+function updateUser(usersName, newUsersName, usersPassword, usersEmail) {
   return new Promise((resolve, reject) => {
     let sql = `
-    UPDATE users SET userName = ?, userPassword = ?, userEmail = ?
-    WHERE userId = ?
+    UPDATE users SET usersName = ?, usersPassword = ?, usersEmail = ?
+    WHERE usersName = ?
     `;
-    let params = [userName, userPassword, userEmail, userId];
+    let params = [newUsersName, usersPassword, usersEmail, usersName];
 
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);
@@ -52,11 +52,11 @@ function updateUser(userName, userPassword, userEmail, userId) {
 }
 
 // DELETE
-function deleteUser(id) {
+function deleteUser(usersName) {
   return new Promise((resolve, reject) => {
-    let sql = "DELETE FROM users WHERE userId = ?";
+    let sql = "DELETE FROM users WHERE usersName = ?";
 
-    connectionMySQL.query(sql, [id], (err) => {
+    connectionMySQL.query(sql, [usersName], (err) => {
       if (err) reject(err);
       else resolve();
     });

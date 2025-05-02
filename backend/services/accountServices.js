@@ -1,10 +1,16 @@
 const connectionMySQL = require("./../connectionMySQL");
 
 // Retrieves account details
-function getAccount(id) {
+function getAccount(usersName) {
   return new Promise((resolve, reject) => {
-    let sql = "SELECT * FROM account WHERE accountId = ?";
-    let params = [id];
+    let sql = `
+    SELECT users.usersName, account.accountBalance
+    FROM account
+    JOIN users ON account.accountId = users.usersId
+    WHERE users.usersName = ?;
+    `;
+    let params = [usersName];
+
     connectionMySQL.query(sql, params, (err, rows) => {
       if (err) reject(err);
       else resolve(rows);
@@ -12,11 +18,18 @@ function getAccount(id) {
   });
 }
 
-// retrieves all accounts
-function createAccount(accountBalance) {
+// create account
+function createAccount(usersName, accountBalance) {
   return new Promise((resolve, reject) => {
-    let sql = "INSERT INTO account (accountBalance ) VALUES (?)";
-    let params = [accountBalance];
+    console.log("usersName: ", usersName);
+
+    let sql = `
+    INSERT INTO account (accountId, accountBalance)
+    SELECT usersId, ?
+    FROM users
+    WHERE usersName = ?;
+    `;
+    let params = [accountBalance, usersName];
 
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);
@@ -26,11 +39,15 @@ function createAccount(accountBalance) {
 }
 
 // Updates the account balance
-function updateAccountBalance(accountBalance, accountId) {
+function updateAccountBalance(accountBalance, usersName) {
   return new Promise((resolve, reject) => {
-    let sql =
-      "UPDATE accountBalance SET accountBalance = ? WHERE accountId = ?";
-    let params = [accountBalance, accountId];
+    let sql = `
+    UPDATE account
+    JOIN users ON account.accountId = users.usersId
+    SET account.accountBalance = ?
+    WHERE users.usersName = ?;
+    `;
+    let params = [accountBalance, usersName];
 
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);

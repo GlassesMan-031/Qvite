@@ -36,7 +36,7 @@ exports.createUser = async (req, res) => {
 // GET USERS
 exports.getUsers = async (req, res) => {
   try {
-    const books = await userService.getUsers();
+    const users = await userService.getUsers();
     res.json({ users });
   } catch (error) {
     return res.status(500).json({
@@ -51,8 +51,8 @@ exports.getUser = async (req, res) => {
   console.log("param" + id);
 
   try {
-    const book = await userService.getuser(id);
-    res.json({ user });
+    const users = await userService.getUser(id);
+    res.json({ users });
   } catch (error) {
     return res.status(500).json({
       error: error.message,
@@ -62,17 +62,23 @@ exports.getUser = async (req, res) => {
 
 // UPDATE USER
 exports.updateUser = async (req, res) => {
-  const { userName, userPassword, userEmail, userId } = req.body;
+  const { newUsersName, usersPassword, usersEmail } = req.body;
+  const { usersName } = req.params;
 
-  if (!userId) {
-    return res.status(400).json({
-      success: false,
-      error: "Du har inte skrivit in något ID för boken du ska uppdatera!",
-    });
-  }
+  // if (!usersName) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     error: "Du har inte skrivit in något ID för boken du ska uppdatera!",
+  //   });
+  // }
 
   try {
-    await userService.updateUser(userName, userPassword, userEmail, userId);
+    await userService.updateUser(
+      usersName,
+      newUsersName,
+      usersPassword,
+      usersEmail
+    );
     return res.status(201).json({
       success: true,
       error: "",
@@ -87,21 +93,21 @@ exports.updateUser = async (req, res) => {
 
 // DELETE USER
 exports.deleteUser = async (req, res) => {
-  const { id } = req.params;
+  const { usersName } = req.params;
 
-  if (!id) {
+  if (!usersName) {
     return res.status(400).json({
       success: false,
-      error: "Du har inte fyllt i ID för användaren du ska radera!",
+      error: "Please select usersName to delete",
     });
   }
 
   try {
-    await userService.deleteUser(id);
+    await userService.deleteUser(usersName);
     return res.status(201).json({
       success: true,
       error: "",
-      message: "Användarkontot är nu raderad!",
+      message: `${usersName} is no more`,
     });
   } catch (error) {
     return res.status(500).json({

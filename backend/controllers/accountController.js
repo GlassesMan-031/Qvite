@@ -1,23 +1,23 @@
 const accountService = require("./../services/accountServices");
 
+//? WE DONT WANT THIS
 // Gets the available accounts (only one)
-exports.getAccounts = async (req, res) => {
-  try {
-    const accounts = await accountService.getAccounts();
-    res.json({ accounts });
-  } catch (error) {
-    return res.status(500).json({
-      error: error.message,
-    });
-  }
-};
+// exports.getAccount = async (req, res) => {
+//   try {
+//     const accounts = await accountService.getAccount();
+//     res.json({ accounts });
+//   } catch (error) {
+//     return res.status(500).json({
+//       error: error.message,
+//     });
+//   }
+// };
 
 exports.getAccount = async (req, res) => {
-  const { id } = req.params;
-  console.log("param" + id);
+  const { usersName } = req.params;
 
   try {
-    const account = await accountService.getAccount(id);
+    const account = await accountService.getAccount(usersName);
     res.json({ account });
   } catch (error) {
     return res.status(500).json({
@@ -29,13 +29,14 @@ exports.getAccount = async (req, res) => {
 // Creates account, throws error if there's no account available
 exports.createAccount = async (req, res) => {
   const { accountBalance } = req.body;
+  const { usersName } = req.params;
 
   try {
-    await accountService.createAccount(accountBalance);
+    await accountService.createAccount(usersName, accountBalance);
     return res.status(201).json({
       success: true,
       error: "",
-      message: "Succesfully created an account, welcome to Qvite!",
+      message: `Succesfully created an account ${usersName}, welcome to Qvite!`,
     });
   } catch (error) {
     return res.status(500).json({
@@ -47,7 +48,8 @@ exports.createAccount = async (req, res) => {
 
 // Updates the balance on the account
 exports.updateAccountBalance = async (req, res) => {
-  const { accountBalance, accountId } = req.body;
+  const { accountBalance } = req.body;
+  const { usersName } = req.params;
 
   if (!accountBalance) {
     return res.status(400).json({
@@ -56,18 +58,19 @@ exports.updateAccountBalance = async (req, res) => {
     });
   }
 
-  if (!accountId) {
-    return res.status(400).json({
-      success: false,
-      error: "There's no account here, please create an account to proceed",
-    });
-  }
+  //? FIX LATER
+  // if (!usersName) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     error: "There's no account here, please create an account to proceed",
+  //   });
+  // }
 
   try {
-    await accountService.updateAccountBalance(accountBalance, accountId);
+    await accountService.updateAccountBalance(accountBalance, usersName);
     return res.status(201).json({
       success: true,
-      error: "",
+      message: `Your new balance is ${accountBalance}`,
     });
   } catch (error) {
     return res.status(500).json({

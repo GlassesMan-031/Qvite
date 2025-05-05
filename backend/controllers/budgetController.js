@@ -3,7 +3,7 @@ const budgetService = require('../services/budgetServices'); // Import the servi
 // Controller to fetch all budgets
 exports.getAllBudgets = async (req, res) => {
     try {
-        const budgets = await budgetService.getBudgets(); 
+        const budgets = await budgetService.getAllBudgets(); 
         res.json(budgets); 
     } catch (error) {
         res.status(500).json({ error: error.message }); 
@@ -44,12 +44,12 @@ exports.createBudget = async (req, res) => {
 
 // Controller to update an existing budget
 exports.updateBudget = async (req, res) => {
-    const { budgetCategoryId, budgetName, budgetAmount, budgetUsed } = req.body;
-    const budgetId = req.params.id; 
+    const { budgetCategoryId, budgetAmount, budgetUsed } = req.body;
+    const {budgetId} = req.params; 
 
     try {
-        await budgetService.updateBudget(budgetCategoryId, budgetName, budgetAmount, budgetUsed, budgetId); 
-        res.json({ message: 'Budget updated' }); 
+        await budgetService.updateBudget(budgetCategoryId, budgetAmount, budgetUsed, budgetId); 
+        res.json({ message: `Budget updated budgetId: ${budgetId}` }); 
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -57,9 +57,11 @@ exports.updateBudget = async (req, res) => {
 
 // Controller to delete a budget by id
 exports.deleteBudget = async (req, res) => {
+    const id = req.params
+    console.log(id)
     try {
-        await budgetService.deleteBudget(req.params.id); 
-        res.json({ message: 'Budget deleted' }); 
+        await budgetService.deleteBudget(id); 
+        res.json({ message: 'Budget deleted ' }); 
     } catch (error) {
         res.status(500).json({ error: error.message }); 
     }

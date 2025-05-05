@@ -24,11 +24,11 @@ function getBudgetById(id) {
 }
 
 /* // Create a new budget 
-function createBudget( budgetCategoryId, budgetName, budgetAmount) {
+function createBudget( budgetCategoryId, budgetAmount) {
     return new Promise((resolve, reject) => {
-        let sql = `INSERT INTO budget (budgetCategoryId, budgetName, budgetAmount) 
+        let sql = `INSERT INTO budget (budgetCategoryId, budgetAmount) 
         VALUES (?,?,?,?)`;
-        let params = [ budgetCategoryId, budgetName, budgetAmount,];
+        let params = [ budgetCategoryId, budgetAmount,];
         connectionMySQL.query(sql, params, (err, result) => {
             if(err) reject(err);
             else resolve(result.insertId);
@@ -37,7 +37,7 @@ function createBudget( budgetCategoryId, budgetName, budgetAmount) {
 } */
 
     // Create a new budget
-function createBudget(usersName, budgetCategoryId, budgetAmount) {
+function createBudget(usersName, budgetCategoryId, budgetAmount,) {
     return new Promise((resolve, reject) => {
         // Start a transaction to ensure data consistency
         connectionMySQL.beginTransaction((err) => {
@@ -45,10 +45,10 @@ function createBudget(usersName, budgetCategoryId, budgetAmount) {
                 console.log("testar om vi kan se budgetamount = ",budgetAmount);
             // Step 1: Insert the budget into the budget table
             let sqlBudget = `
-                INSERT INTO budget (budgetCategoryId, budgetAmount)
-                VALUES (?, ?)
+                INSERT INTO budget (budgetCategoryId, budgetAmount, budgetAccountId)
+                VALUES (?, ?,(SELECT usersId FROM users WHERE usersName = ?))
             `;
-            let budgetParams = [budgetCategoryId, budgetAmount];
+            let budgetParams = [budgetCategoryId, budgetAmount, usersName];
 
             connectionMySQL.query(sqlBudget, budgetParams, (err, budgetResult) => {
                 if (err) {
@@ -110,14 +110,14 @@ function createBudget(usersName, budgetCategoryId, budgetAmount) {
 
 
 
-// update exsisting  budget
-function updateBudget(budgetCategoryId, budgetName, budgetAmount, budgetUsed, budgetId) {
+// update exsisting  budget //! bugetused not used here 
+function updateBudget(budgetCategoryId, budgetAmount,budgetUsed ,budgetId) {
     return new Promise((resolve, reject) => {
-        let sql = 'UPDATE budget SET budgetCategoryId = ?, budgetName = ?, budgetAmount = ?, budgetUsed = ? WHERE budgetId = ?';
-        let params = [budgetCategoryId, budgetName, budgetAmount, budgetUsed, budgetId];
+        let sql = 'UPDATE budget SET budgetCategoryId = ?, budgetAmount = ?, budgetUsed = ? WHERE budgetId = ?';
+        let params = [budgetCategoryId, budgetAmount, budgetUsed ,budgetId];
         connectionMySQL.query(sql, params, (err) => {
             if(err) reject(err);
-            else resolve();
+            else resolve("Your budget updated successfully!");
         });
     });
 }

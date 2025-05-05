@@ -12,9 +12,9 @@ router.get('/api/:usersName/:budgetName', budgetController.getBudget);
 router.post('/api/:usersName/budgets', budgetController.createBudget);
 
 // Update budget
-router.put('/api/:usersName/:budgetName', budgetController.updateBudget);
+router.put('/api/:usersName/:budgetId', budgetController.updateBudget);
 
 // Delete budget
-router.delete('/api/:usersName/:budgetName', budgetController.deleteBudget);
+router.delete('/api/budgets/:budgetId', budgetController.deleteBudget);
 
 module.exports = router;

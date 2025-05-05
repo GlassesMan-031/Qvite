@@ -23,17 +23,19 @@ exports.getBudget = async (req, res) => {
 
 // Controller to create a new budget
 exports.createBudget = async (req, res) => {
-    const { budgetCategoryId, budgetName, budgetAmount, budgetUsed } = req.body; 
-
-    if (!budgetCategoryId || !budgetName || !budgetAmount|| !budgetUsed) {
+    const { budgetCategoryId,  budgetAmount, } = req.body; 
+    const {usersName } = req.params;
+    console.log("testing testing budget");
+    
+   /*  if (!budgetCategoryId || !budgetName || !budgetAmount|| !budgetUsed) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
     if (budgetAmount < 0 || budgetUsed < 0) {
         return res.status(400).json({ message: 'Amount and used must be assigned' });
-    }
+    } */
     try {
-        const newId = await budgetService.createBudget(budgetCategoryId, budgetName, budgetAmount, budgetUsed); 
+        const newId = await budgetService.createBudget(usersName, budgetCategoryId, budgetAmount ); 
         res.status(201).json({ message: 'Budget created', budgetId: newId }); 
     } catch (error) {
         res.status(500).json({ error: error.message }); 

@@ -1,0 +1,269 @@
+type: collection.insomnia.rest/5.0
+name: SCB
+meta:
+  id: wrk_7b437fa63f574bc58e66b9a324caa31b
+  created: 1732611272837
+  modified: 1732611272837
+collection:
+  - name: ITHS - Javascript - Lab2
+    meta:
+      id: fld_08f80fb3c2ac401cb62ea3098f167f33
+      created: 1732797677003
+      modified: 1744100322228
+      sortKey: -1734110613855
+  - name: Databaser och backend
+    meta:
+      id: fld_a2d0726ba00d4bd58cc21c49b60dc285
+      created: 1744100319793
+      modified: 1744110674171
+      sortKey: -1744100319793
+  - name: Databaser Labb 3
+    meta:
+      id: fld_ca80e20644864896b3e2bbc3fa4ca73c
+      created: 1745138022495
+      modified: 1746188157933
+      sortKey: -1745138022495
+  - name: BackendBoys
+    meta:
+      id: fld_518f4297b65640cf82a3f02cd1ece36b
+      created: 1746013492232
+      modified: 1746013507268
+      sortKey: -1746013492233
+    children:
+      - url: http://localhost:3000/api/users
+        name: Add User
+        meta:
+          id: req_8cb0418ccf93420bbbec32e8aac95b6f
+          created: 1746013497227
+          modified: 1746185886223
+          isPrivate: false
+          sortKey: -1746013502082
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "usersName": "Bengt",
+            	"usersPassword": "tjo",
+            	"usersEmail": "bengan@gmail.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/users
+        name: Get Users
+        meta:
+          id: req_cd051c3790f14991960d488b3f68f9fd
+          created: 1746013532514
+          modified: 1746173068636
+          isPrivate: false
+          sortKey: -1745575782622
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/Bengt/account
+        name: Add Account
+        meta:
+          id: req_fc5f3af718a6433cbbe7e50fbe251371
+          created: 1746172710309
+          modified: 1746185903321
+          isPrivate: false
+          sortKey: -1745575782522
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"accountBalance": 4000000
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/LisaLotta/account
+        name: Get User Account
+        meta:
+          id: req_a72455441ffe4c058f20b268e08eae70
+          created: 1746173677783
+          modified: 1746188079166
+          isPrivate: false
+          sortKey: -1745575782497
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/Lisa
+        name: Edit User
+        meta:
+          id: req_00be56808dc141939a977f71d89434a0
+          created: 1746186560379
+          modified: 1746186626866
+          isPrivate: false
+          sortKey: -1745575782572
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "newUsersName": "LisaLotta",
+            	"usersPassword": "tjo",
+            	"usersEmail": "lisalotta@gmail.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/LisaLotta/account
+        name: Edit Account
+        meta:
+          id: req_8b19b8b7c6ae4ab39ee3be0cc57018e7
+          created: 1746186710019
+          modified: 1746187482041
+          isPrivate: false
+          sortKey: -1745575782472
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"accountBalance": 777
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3000/api/Per
+        name: Delete User
+        meta:
+          id: req_386ef3550ec24c38b46f5878e322c4fd
+          created: 1746188637124
+          modified: 1746188755565
+          isPrivate: false
+          sortKey: -1745575782547
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_68824c6501faa8304e991d754e39aa8aebbc8218
+    created: 1732611272847
+    modified: 1734090068202
+  cookies:
+    - key: TS0187a64b
+      value: 017dca055c482833bb099336d7414a9139c083f953849ffd84711575f53831fb520a8a40b298bf80fa75ea75ec556327429238d7ad
+      domain: api.scb.se
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: false
+      creation: 2024-11-26T08:55:04.748Z
+      lastAccessed: 2024-12-13T11:41:08.194Z
+      id: c6b502cc-a1b6-4c2f-8ee0-e6b670a02831
+    - key: cookiesession1
+      value: 678A3E0E180542F9CB804DBC7945AE0C
+      domain: api.fiscaldata.treasury.gov
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2024-11-28T12:44:31.869Z
+      lastAccessed: 2024-11-28T12:44:31.869Z
+      id: 864cd075-ed3e-4ead-ba93-87b7fd06fa1d
+    - key: BIGipServer~api.fiscaldata.treasury.gov~Shared~api.fiscaldata.treasury.gov_443_lbve_tcp_pl
+      value: "!GRIZWF83Lq4f4Vn2/8wDqIMQkzmG2jpZdAkrsbNdeTXc1u1V3CJsMrAvF2IfQfAQSSa/GJ\
+        IcuCubrg=="
+      domain: api.fiscaldata.treasury.gov
+      path: /
+      secure: true
+      httpOnly: true
+      hostOnly: true
+      creation: 2024-11-28T12:44:31.872Z
+      lastAccessed: 2024-11-28T12:44:31.872Z
+      id: 98014d92-b022-45e2-b3ce-ad36051a1ad5
+    - key: api.worldbank.org
+      value: 7822cd50aa6a201eac9029a4bd276d80
+      domain: api.worldbank.org
+      path: /
+      hostOnly: true
+      creation: 2024-12-08T12:56:38.197Z
+      lastAccessed: 2024-12-08T12:56:38.197Z
+      id: 0aa0d96e-999d-4fcb-b7ec-919699f70f00
+    - key: __cf_bm
+      value: 9ghDwvXfsqjbcHm9Qp9TGqkKUH6na7MD7HRPczUEXII-1733662958-1.0.1.1-cLT0t1G.ueR5bjob5OuA1B5itJZDLtSHUg..MbUsuyLOTv0aWge0UPFAeietQzKeaqmniLtwYrPCeFqZzQzUyg
+      domain: worldbank.org
+      path: /
+      httpOnly: true
+      hostOnly: false
+      creation: 2024-12-08T12:56:38.205Z
+      lastAccessed: 2024-12-08T13:02:38.838Z
+      id: 1466f4f1-1695-493d-9456-e407407fdb6d
+environments:
+  name: Base Environment
+  meta:
+    id: env_68824c6501faa8304e991d754e39aa8aebbc8218
+    created: 1732611272844
+    modified: 1732611272844
+    isPrivate: false

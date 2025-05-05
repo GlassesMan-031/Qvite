@@ -3,18 +3,18 @@ const router = express.Router();
 const budgetController = require('../controllers/budgetController');
 
 // Get all budgets
-router.get('user/account/budgets', budgetController.getBudgets);
+router.get('/api/:usersName/budgets', budgetController.getAllBudgets);
 
 // Get budget with ID
-router.get('user/account/budgets/:id', budgetController.getBudget);
+router.get('/api/:usersName/:budgetName', budgetController.getBudget);
 
 // Create new budget
-router.post('user/account/budgets', budgetController.createBudget);
+router.post('/api/:usersName/budgets', budgetController.createBudget);
 
 // Update budget
-router.put('user/account/budgets/:id', budgetController.updateBudget);
+router.put('/api/:usersName/:budgetName', budgetController.updateBudget);
 
 // Delete budget
-router.delete('user/account/budgets/:id', budgetController.deleteBudget);
+router.delete('/api/:usersName/:budgetName', budgetController.deleteBudget);
 
 module.exports = router;

@@ -7,10 +7,7 @@ router.get(
   transactionsController.getTransactions
 );
 
-router.get(
-  "/user/account/transactions/:id",
-  transactionsController.getTransaction
-);
+router.get("/user/account/transaction", transactionsController.getTransaction);
 
 router.post(
   "/user/account/transactions",
@@ -23,7 +20,7 @@ router.put(
 );
 
 router.delete(
-  "/user/account/transactions/:id",
+  "/user/account/transactions",
   transactionsController.deleteTransaction
 );
 

@@ -14,9 +14,12 @@ app.use(express.static("public"));
 const userRoutes = require("./routes/userRoutes");
 const accountRoutes = require("./routes/accountRoutes");
 const budgetRoutes = require("./routes/budgetRoutes");
+const budgetCategoryRoutes = require("./routes/budgetCategoryRoutes");
 
+app.use(budgetCategoryRoutes);
 app.use(userRoutes);
 app.use(accountRoutes);
 app.use(budgetRoutes);
+
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

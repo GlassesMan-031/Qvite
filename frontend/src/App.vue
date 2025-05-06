@@ -1,50 +1,10 @@
 <template>
-	<div class="intro">
-		<h1 class="calsans-text">Welcome to QVITE</h1>
-		<p class="introText darkerG-Light">the sleek finance tracker</p>
-	</div>
-	<!-- <HelloWorld msg="Vite + Vue" /> -->
+    <RouterView />
 </template>
 
 <script setup>
-// import HelloWorld from './components/HelloWorld.vue'
+import { ref, computed } from "vue";
+
 </script>
 
-<style scoped>
-body {
-	background-color: #ebe3d5;
-	color: #b0a695;
-}
-
-.introText {
-	margin-top: -14px;
-}
-.calsans-text {
-	font-family: "Cal Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-	color: #b0a695;
-}
-
-.darkerG-Bold {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: bold;
-	font-style: normal;
-}
-
-.darkerG-Light {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 600;
-	font-style: normal;
-	color: #b0a695;
-}
-
-.darkerG-Normal {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: normal;
-	font-style: normal;
-}
-</style>
+<style scoped></style>

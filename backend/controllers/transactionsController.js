@@ -12,10 +12,10 @@ exports.getTransactions = async (req, res) => {
 };
 
 exports.getTransaction = async (req, res) => {
-  const { transactionAccountId } = req.params;
+  const { id } = req.body;
   try {
     const transaction = await transactionModel.find({
-      transcactionId: transcationId,
+      _id: id,
     });
     return res.status(200).json(transaction);
   } catch (error) {
@@ -57,27 +57,29 @@ exports.createTransaction = async (req, res) => {
 // update transction, ask jerry how to find  ref ID
 exports.updateTransaction = async (req, res) => {
   const {
+    id,
     transactionAccountId,
     transactionNote,
     transactionAmount,
     transactionImage,
-    transactionReurring,
+    transactionRecurring,
     transactionDate,
   } = req.body;
 
   try {
     await transactionModel.updateOne(
-      { transactionAccountId: inputTransactionAccountId },
+      { _id: id },
       {
-        transactionNote: inputTransactionNote,
-        transactionAmount: inputTransactionAmount,
-        transactionImage: inputTransactionImage,
-        transactionRecurring: inputRransactionRecurring,
-        transactionDate: inputTransactionDate,
+        transactionAccountId,
+        transactionNote,
+        transactionAmount,
+        transactionImage,
+        transactionRecurring,
+        transactionDate,
       }
     );
     const updatedTransaction = await transactionModel.find({
-      transactionAccountId: inputTransactionAccountId,
+      _id: id,
     });
     return res.status(201).json(updatedTransaction);
   } catch (error) {
@@ -90,12 +92,14 @@ exports.updateTransaction = async (req, res) => {
 //delete transaction
 
 exports.deleteTransaction = async (req, res) => {
-  const { transactionAccountId } = req.params;
+  const { id } = req.body;
   try {
     const deletedBook = await transactionModel.deleteOne({
-      transactionAccountId: inputTransactionAccountId,
+      _id: id,
     });
-    return res.status(200).json(deletedTransaction);
+    return res
+      .status(200)
+      .json("The transaction has been thrown into the fires of Mount");
   } catch (error) {
     return res.status(500).json({
       error: error.message,

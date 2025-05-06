@@ -1,30 +1,50 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+	<div class="intro">
+		<h1 class="calsans-text">Welcome to QVITE</h1>
+		<p class="introText darkerG-Light">the sleek finance tracker</p>
+	</div>
+	<!-- <HelloWorld msg="Vite + Vue" /> -->
 </template>
 
+<script setup>
+// import HelloWorld from './components/HelloWorld.vue'
+</script>
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+body {
+	background-color: #ebe3d5;
+	color: #b0a695;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.introText {
+	margin-top: -14px;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.calsans-text {
+	font-family: "Cal Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: #b0a695;
+}
+
+.darkerG-Bold {
+	font-family: "Darker Grotesque", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.darkerG-Light {
+	font-family: "Darker Grotesque", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 600;
+	font-style: normal;
+	color: #b0a695;
+}
+
+.darkerG-Normal {
+	font-family: "Darker Grotesque", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: normal;
+	font-style: normal;
 }
 </style>

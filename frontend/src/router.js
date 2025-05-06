@@ -11,7 +11,7 @@ export default createRouter({
 	routes: [
 		 {
 			component: SplashView,
-			path: "/welcome/",
+			path: "/",
 		}, 
 		{
 			component: HomeView,

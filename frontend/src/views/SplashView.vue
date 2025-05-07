@@ -1,8 +1,10 @@
 <template>
+    <div class="splash-background">
     <div class="intro">
         <h1 class="calsans-text">Welcome to QVITE</h1>
         <p class="introText darkerG-Light">the sleek finance tracker</p>
       </div>
+    </div>
     </template>
     
     <script setup>
@@ -11,6 +13,18 @@
     
     <style scoped>
     
+    .splash-background {
+        background-image: url('/bg.png');
+        background-size: cover;
+        /* background-position: center; */
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        width: 100%;
+        display:flex;
+        place-items: center;
+        justify-content: center;
+        }
+
     body {
       background-color: #ebe3d5;
       color: #b0a695;

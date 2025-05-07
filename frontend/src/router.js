@@ -4,7 +4,7 @@ import HomeView from "./views/HomeView.vue"
 
 import SplashView from "./views/SplashView.vue"
 
-
+import loginView from "./views/LoginView.vue"
 
 export default createRouter({
 	history: createWebHashHistory(),
@@ -16,6 +16,10 @@ export default createRouter({
 		{
 			component: HomeView,
 			path: "/home",
+		},
+		{
+			component: loginView,
+			path: "/login",
 		}
 
 	],

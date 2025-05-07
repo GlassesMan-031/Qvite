@@ -29,183 +29,384 @@ collection:
       created: 1746013492232
       modified: 1746013507268
       sortKey: -1746013492233
+  - name: BackendBoys
+    meta:
+      id: fld_ca2a4f2bdb1a489c8a5d72ba56cb390d
+      created: 1746013492232
+      modified: 1746356529931
+      sortKey: -1746013492233
     children:
-      - url: http://localhost:3000/api/users
-        name: Add User
+      - name: User
         meta:
-          id: req_8cb0418ccf93420bbbec32e8aac95b6f
-          created: 1746013497227
-          modified: 1746185886223
-          isPrivate: false
-          sortKey: -1746013502082
-        method: POST
-        body:
-          mimeType: application/json
-          text: |-
-            {
-              "usersName": "Bengt",
-            	"usersPassword": "tjo",
-            	"usersEmail": "bengan@gmail.com"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/users
-        name: Get Users
+          id: fld_208f247ff84a477ba4c1dfdbef06bd37
+          created: 1746430999091
+          modified: 1746431009574
+          sortKey: -1746013502182
+        children:
+          - url: http://localhost:3000/api/users
+            name: Add User
+            meta:
+              id: req_54bd7e0888874faeb38f4d7900d43cff
+              created: 1746013497227
+              modified: 1746431012860
+              isPrivate: false
+              sortKey: -1746431012760
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "usersName": "Bengt",
+                	"usersPassword": "tjo",
+                	"usersEmail": "bengan@gmail.com"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/api/users
+            name: Get Users
+            meta:
+              id: req_72a8c1bb1b8c4101bda6d786e7d8cd88
+              created: 1746013532514
+              modified: 1746431017511
+              isPrivate: false
+              sortKey: -1746431012860
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/api/Lisa
+            name: Edit User
+            meta:
+              id: req_e1080052a3284a24b60c688f4107d8ce
+              created: 1746186560379
+              modified: 1746431020076
+              isPrivate: false
+              sortKey: -1746431012960
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "newUsersName": "LisaLotta",
+                	"usersPassword": "tjo",
+                	"usersEmail": "lisalotta@gmail.com"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/api/Per
+            name: Delete User
+            meta:
+              id: req_cf3c1f0df12d47009c67d2842e108efa
+              created: 1746188637124
+              modified: 1746431031839
+              isPrivate: false
+              sortKey: -1746431013060
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Account
         meta:
-          id: req_cd051c3790f14991960d488b3f68f9fd
-          created: 1746013532514
-          modified: 1746173068636
-          isPrivate: false
-          sortKey: -1745575782622
-        method: GET
-        headers:
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/Bengt/account
-        name: Add Account
+          id: fld_34c2fb13b6784ae996d83cf2a00334aa
+          created: 1746431040455
+          modified: 1746431113023
+          sortKey: -1746013502282
+        children:
+          - url: http://localhost:3000/api/Per/account
+            name: Add Account
+            meta:
+              id: req_07f0e4ae3a09403c9edd0f9461ad3a60
+              created: 1746172710309
+              modified: 1746431889506
+              isPrivate: false
+              sortKey: -1746431055985
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"accountBalance": 666
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/api/Per/account
+            name: Get User Account
+            meta:
+              id: req_49863b867d0b4c9a8f6cd5feb0e44824
+              created: 1746173677783
+              modified: 1746431854292
+              isPrivate: false
+              sortKey: -1746431056185
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/api/LisaLotta/account
+            name: Edit Account
+            meta:
+              id: req_60e3fceb98bf4bbab7727d1fac287eaf
+              created: 1746186710019
+              modified: 1746431064746
+              isPrivate: false
+              sortKey: -1746431056085
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"accountBalance": 777
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Budget
         meta:
-          id: req_fc5f3af718a6433cbbe7e50fbe251371
-          created: 1746172710309
-          modified: 1746185903321
-          isPrivate: false
-          sortKey: -1745575782522
-        method: POST
-        body:
-          mimeType: application/json
-          text: |-
-            {
-            	"accountBalance": 4000000
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/LisaLotta/account
-        name: Get User Account
+          id: fld_6bef459e9b354104ada07665a1749e84
+          created: 1746431075304
+          modified: 1746431112132
+          sortKey: -1746013502382
+        children:
+          - url: http://localhost:3000/api/Per/budgets
+            name: Add Budget
+            meta:
+              id: req_c74824f47b994eb8a466b5b39bf76acc
+              created: 1746431142126
+              modified: 1746444851004
+              isPrivate: false
+              sortKey: -1746431146598
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	 "budgetCategoryId": 3 ,
+                    "budgetAmount": 333
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Transaction
         meta:
-          id: req_a72455441ffe4c058f20b268e08eae70
-          created: 1746173677783
-          modified: 1746188079166
-          isPrivate: false
-          sortKey: -1745575782497
-        method: GET
-        headers:
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/Lisa
-        name: Edit User
-        meta:
-          id: req_00be56808dc141939a977f71d89434a0
-          created: 1746186560379
-          modified: 1746186626866
-          isPrivate: false
-          sortKey: -1745575782572
-        method: PUT
-        body:
-          mimeType: application/json
-          text: |-
-            {
-              "newUsersName": "LisaLotta",
-            	"usersPassword": "tjo",
-            	"usersEmail": "lisalotta@gmail.com"
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/LisaLotta/account
-        name: Edit Account
-        meta:
-          id: req_8b19b8b7c6ae4ab39ee3be0cc57018e7
-          created: 1746186710019
-          modified: 1746187482041
-          isPrivate: false
-          sortKey: -1745575782472
-        method: PUT
-        body:
-          mimeType: application/json
-          text: |-
-            {
-            	"accountBalance": 777
-            }
-        headers:
-          - name: Content-Type
-            value: application/json
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
-      - url: http://localhost:3000/api/Per
-        name: Delete User
-        meta:
-          id: req_386ef3550ec24c38b46f5878e322c4fd
-          created: 1746188637124
-          modified: 1746188755565
-          isPrivate: false
-          sortKey: -1745575782547
-        method: DELETE
-        headers:
-          - name: User-Agent
-            value: insomnia/11.0.2
-        settings:
-          renderRequestBody: true
-          encodeUrl: true
-          followRedirects: global
-          cookies:
-            send: true
-            store: true
-          rebuildPath: true
+          id: fld_84212426cd8c4441ad52946f54d60850
+          created: 1746534882240
+          modified: 1746534882240
+          sortKey: -1746534882240
+        children:
+          - url: http://localhost:3000/user/account/transactions
+            name: Read Transactions
+            meta:
+              id: req_9849412194ba4e70b59f9ef99a27f57a
+              created: 1746532465789
+              modified: 1746537081068
+              isPrivate: false
+              sortKey: -1746534886016
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/user/account/transactions
+            name: Create Transaction
+            meta:
+              id: req_85458e7f8bc04e628359d810991ee01b
+              created: 1746534952973
+              modified: 1746538540112
+              isPrivate: false
+              sortKey: -1746483016307
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "_id": "66389acfb0fcf0e84dbe9214",
+                  "transactionAccountId": 1,
+                  "transactionNote": "Lunch",
+                  "transactionAmount": 89,
+                  "transactionDate": "2025-05-06T00:00:00.000Z",
+                  "__v": 0
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/user/account/transactions
+            name: UpdateTransaction
+            meta:
+              id: req_33be03ffc47148b5a897c8bdf5942b17
+              created: 1746535373939
+              modified: 1746538624197
+              isPrivate: false
+              sortKey: -1746457081452.5
+            method: PUT
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "id": "681a0e601348abdf57924757",
+                  "transactionNote": "P-lisa"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/user/account/transactions
+            name: Delete Transaction
+            meta:
+              id: req_88da77991e77493a80c8586c372ab27a
+              created: 1746537580955
+              modified: 1746538949074
+              isPrivate: false
+              sortKey: -1746444114025.25
+            method: DELETE
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                  "id": "681a074fd2c8a1e028dfb28d"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:3000/user/account/transaction
+            name: Read Transaction
+            meta:
+              id: req_62f6d6835e6341b68caac613de9e433f
+              created: 1746538017057
+              modified: 1746538348022
+              isPrivate: false
+              sortKey: -1746508951161.5
+            method: GET
+            body:
+              mimeType: application/json
+              text: |-
+                {
+                	"id": "681a0e601348abdf57924757"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/11.0.2
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
 cookieJar:
   name: Default Jar
   meta:

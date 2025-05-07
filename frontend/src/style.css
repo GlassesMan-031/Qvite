@@ -5,7 +5,7 @@
 
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	background-color: #5b8e7d;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -23,10 +23,10 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 h1 {
@@ -58,11 +58,9 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  text-align: center;
-
-
+	max-width: 1280px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 @media (prefers-color-scheme: light) {

@@ -4,8 +4,8 @@
 	font-weight: 400;
 
 	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+	color: #ffffffde;
+	background-color: #5B8E7D;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -78,7 +78,7 @@ button:focus-visible {
 	}
 }
 
-/* colorscheme: 
+/* colorscheme:
 #ebe3d5 - LIGHTCREAM
 #b0a695 - MIDGRAY
 #776B5D - DARKGRANITE

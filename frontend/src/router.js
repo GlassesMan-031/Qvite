@@ -26,16 +26,5 @@ export default createRouter({
       name: "home",
     },
 
-    // 		{
-
-    // 	component: loginView,
-    // 	path: "/login",
-    //   name: "login"
-
-    // 	component: createView,{
-    // 	path: "/create",
-    //   name: "create"
-
-    // }
   ],
 });

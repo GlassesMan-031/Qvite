@@ -20,9 +20,12 @@ export default createRouter({
       component: HomeView,
       path: "/home",
     },
+
     		{
 			component: createView,
 			path: "/create",
 		}
+
+   
   ],
 });

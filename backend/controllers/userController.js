@@ -2,9 +2,11 @@ const userService = require("./../services/userService");
 
 // CREATE USER
 exports.createUser = async (req, res) => {
-  const { usersName, usersPassword, usersEmail } = req.body;
+  const { name, usersName, usersPassword, usersEmail } = req.body;
 
   if (
+    !name ||
+    name.trim().length < 1 ||
     !usersName ||
     usersName.trim().length < 1 ||
     !usersPassword ||
@@ -19,7 +21,7 @@ exports.createUser = async (req, res) => {
   }
 
   try {
-    await userService.createUser(usersName, usersPassword, usersEmail);
+    await userService.createUser(name, usersName, usersPassword, usersEmail);
     return res.status(201).json({
       success: true,
       error: "",
@@ -64,13 +66,6 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   const { newUsersName, usersPassword, usersEmail } = req.body;
   const { usersName } = req.params;
-
-  // if (!usersName) {
-  //   return res.status(400).json({
-  //     success: false,
-  //     error: "Du har inte skrivit in något ID för boken du ska uppdatera!",
-  //   });
-  // }
 
   try {
     await userService.updateUser(
@@ -119,7 +114,7 @@ exports.deleteUser = async (req, res) => {
 
 // CHECK IF USER EXISTS
 exports.checkUserExists = async (req, res) => {
-  const { usersName, usersEmail } = req.body;
+  const { usersName, usersEmail } = req.query;
 
   try {
     const exists = await userService.checkUserExists(usersName, usersEmail);
@@ -130,4 +125,3 @@ exports.checkUserExists = async (req, res) => {
     });
   }
 };
-

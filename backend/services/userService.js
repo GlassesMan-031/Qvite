@@ -1,11 +1,11 @@
 const connectionMySQL = require("../connectionMySQL");
 
 // CREATE
-function createUser(usersName, usersPassword, usersEmail) {
+function createUser(name, usersName, usersPassword, usersEmail) {
   return new Promise((resolve, reject) => {
     let sql =
-      "INSERT INTO users (usersName, usersPassword, usersEmail) VALUES (?,?,?)";
-    let params = [usersName, usersPassword, usersEmail];
+      "INSERT INTO users (name, usersName, usersPassword, usersEmail) VALUES (?, ?, ?, ?)";
+    let params = [name, usersName, usersPassword, usersEmail];
 
     connectionMySQL.query(sql, params, (err) => {
       if (err) reject(err);
@@ -77,12 +77,11 @@ function checkUserExists(usersName, usersEmail) {
   });
 }
 
-
 module.exports = {
-  checkUserExists,
   getUsers,
   getUser,
   createUser,
   updateUser,
   deleteUser,
+  checkUserExists
 };

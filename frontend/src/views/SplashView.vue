@@ -32,11 +32,11 @@
               placeholder="Password"
             />
           </div>
-          <div id="login-container">
-            <button id="login-button">
-              <p>LOGGA IN</p>
-            </button>
-          </div>
+          <BCol cols="10">
+            <div id="login-container">
+              <RouterLink to="/home" id="login-button">Log in</RouterLink>
+            </div>
+          </BCol>
         </BRow>
       </BContainer>
     </BRow>
@@ -45,6 +45,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
 
 const formData = ref({
   productName: "",
@@ -141,12 +142,14 @@ body {
 }
 
 #login-container {
-  /* background-color: lightcoral; */
-  height: 40px;
-  place-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px; /* Slightly taller for comfort */
 }
 
 #login-button {
+  /* display: flex; */
   background-color: #5b8e7d;
   font-family: "Cal Sans", sans-serif;
   margin-top: 24px;

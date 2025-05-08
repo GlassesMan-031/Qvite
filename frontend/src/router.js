@@ -4,6 +4,7 @@ import HomeView from "./views/homeView.vue";
 import SplashView from "./views/SplashView.vue";
 import transactionView from "./views/transactionView.vue";
 import createView from "./views/createView.vue"
+import BudgetsView from "./views/BudgetsView.vue";
 
 // add router name so that we can choose where to display components
 
@@ -25,14 +26,15 @@ export default createRouter({
       path: "/home",
       name: "home"
     },
+    {
+      component: BudgetsView,
+      path: "/budgets",
+      name: "budgets"
+    },
 
-    		{
-
-			component: loginView,
-			path: "/login",
-      name: "login"
-
-			component: createView,
+   
+    {
+      component: createView,
 			path: "/create",
       name: "create"
 

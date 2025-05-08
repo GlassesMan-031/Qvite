@@ -63,7 +63,23 @@ function deleteUser(usersName) {
   });
 }
 
+// check if user exists 
+function checkUserExists(usersName, usersEmail) {
+  return new Promise((resolve, reject) => {
+    let sql = `
+      SELECT * FROM users
+      WHERE usersName = ? OR usersEmail = ?
+    `;
+    connectionMySQL.query(sql, [usersName, usersEmail], (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows.length > 0); // true = finns redan
+    });
+  });
+}
+
+
 module.exports = {
+  checkUserExists,
   getUsers,
   getUser,
   createUser,

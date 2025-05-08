@@ -34,7 +34,9 @@
           </div>
           <BCol cols="10">
             <div id="login-container">
-              <RouterLink to="/home" id="login-button">Log in</RouterLink>
+              <RouterLink to="/home" @click.prevent id="login-button"
+                >Log in</RouterLink
+              >
             </div>
           </BCol>
         </BRow>
@@ -149,15 +151,21 @@ body {
 }
 
 #login-button {
-  /* display: flex; */
+  display: inline-block; /* Ensures it's treated like a button */
   background-color: #5b8e7d;
   font-family: "Cal Sans", sans-serif;
-  margin-top: 24px;
+  margin: 12px auto;
+  padding: 0 1rem;
   height: 40px;
   width: 240px;
   border-radius: 6px;
-  border: none;
   box-shadow: 5px 3px 3px #776b5d;
+  text-align: center;
+  line-height: 40px;
+  color: white;
+  text-decoration: none;
+  z-index: 10;
+  position: relative;
 }
 
 .darkerG-Bold {

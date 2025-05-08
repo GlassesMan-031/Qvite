@@ -9,24 +9,34 @@
             alt="QVITE Logo"
             fluid
           />
-          <p class="calsans-text">the sleek finance tracker</p>
+          <p class="lower-header">the sleek finance tracker</p>
         </BCol>
       </BCol>
       <BContainer fluid class="formContainer">
-        <h2>An input formula is supposed to go here !</h2>
         <BRow>
           <BCol cols="10">
-            <div class="productName">
-              <BFormGroup label="Namn på produkt" label-for="input-1">
-                <BFormInput
-                  id="input-1"
-                  v-model="formData.productName"
-                  type="text"
-                  placeholder="Skriv här"
-                />
-              </BFormGroup>
+            <div class="form-input">
+              <Input
+                id="input-1"
+                v-model="formData.productName"
+                type="text"
+                placeholder="Username"
+              />
             </div>
           </BCol>
+          <div class="form-input">
+            <Input
+              id="input-2"
+              v-model="formData.productName"
+              type="text"
+              placeholder="Password"
+            />
+          </div>
+          <div id="login-container">
+            <button id="login-button">
+              <p>LOGGA IN</p>
+            </button>
+          </div>
         </BRow>
       </BContainer>
     </BRow>
@@ -60,7 +70,7 @@ const formData = ref({
 }
 
 .splash-background {
-  /* background-image: url("/bg.png"); */
+  background-image: url("/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -88,11 +98,63 @@ body {
 .intro-text {
   margin-top: -14px;
 }
-.calsans-text {
+.lower-header {
   font-family: "Cal Sans", sans-serif;
   font-weight: 400;
-  font-style: normal;
+  font-style: bolder;
   color: #2c2a29;
+  /* background-color: lightcoral; */
+}
+
+.form-input {
+  width: auto;
+  height: 48px;
+  margin: 12px;
+  padding: 12px;
+  place-content: center;
+
+  /* background-color: lightcoral; */
+}
+
+#input-1 {
+  background-color: #f5f5f5;
+  font-family: "Cal Sans", sans-serif;
+  color: #2c2a29;
+  height: 40px;
+  width: 240px;
+  text-align: center;
+  border-radius: 6px;
+  border: none;
+  box-shadow: inset 5px 3px 3px #776b5d;
+}
+
+#input-2 {
+  background-color: #f5f5f5;
+  font-family: "Cal Sans", sans-serif;
+  color: #2c2a29;
+  height: 40px;
+  width: 240px;
+  text-align: center;
+  border-radius: 6px;
+  border: none;
+  box-shadow: inset 5px 3px 3px #776b5d;
+}
+
+#login-container {
+  /* background-color: lightcoral; */
+  height: 40px;
+  place-content: center;
+}
+
+#login-button {
+  background-color: #5b8e7d;
+  font-family: "Cal Sans", sans-serif;
+  margin-top: 24px;
+  height: 40px;
+  width: 240px;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 5px 3px 3px #776b5d;
 }
 
 .darkerG-Bold {

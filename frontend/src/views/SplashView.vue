@@ -17,14 +17,12 @@
         <BRow>
           <BCol cols="10">
             <div class="productName">
-              <BFormGroup label="Namn på produkt" label-for="input-1">
-                <BFormInput
-                  id="input-1"
-                  v-model="formData.productName"
-                  type="text"
-                  placeholder="Skriv här"
-                />
-              </BFormGroup>
+              <Input
+                id="input-1"
+                v-model="formData.productName"
+                type="text"
+                placeholder="Skriv här"
+              />
             </div>
           </BCol>
         </BRow>

@@ -16,19 +16,19 @@
         <BRow>
           <BCol cols="10">
             <div class="form-input">
-              <Input
+              <input
                 id="input-1"
-                v-model="formData.productName"
+                v-model="formData.username"
                 type="text"
                 placeholder="Username"
               />
             </div>
           </BCol>
           <div class="form-input">
-            <Input
+            <input
               id="input-2"
-              v-model="formData.productName"
-              type="text"
+              v-model="formData.password"
+              type="password"
               placeholder="Password"
             />
           </div>
@@ -50,7 +50,8 @@ import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
 const formData = ref({
-  productName: "",
+  username: "",
+  password: "",
 });
 </script>
 

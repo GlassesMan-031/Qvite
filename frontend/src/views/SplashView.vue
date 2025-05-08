@@ -9,7 +9,7 @@
             alt="QVITE Logo"
             fluid
           />
-          <p class="lower-header">the sleek finance tracker</p>
+          <h3 class="lower-header">the sleek finance tracker</h3>
         </BCol>
       </BCol>
 
@@ -37,10 +37,10 @@
               </RouterLink>
             </div>
             <div class="bottom-links-wrapper">
-              <RouterLink to="/register" class="bottom-links"
+              <RouterLink to="/create" class="bottom-links"
                 >Create Account</RouterLink
               >
-              <RouterLink to="/forgot-password" class="bottom-links"
+              <RouterLink to="/recover" class="bottom-links"
                 >Forgot password?</RouterLink
               >
             </div>

@@ -64,9 +64,14 @@
         </div>
       </div>
     </form>
+    <button @click="qvite.getUsers">Fetch Users</button>
   </main>
 </template>
-<script setup></script>
+<script setup>
+import { useQvite } from "../stores/qvite";
+
+const qvite = useQvite();
+</script>
 <style scoped>
 .background {
   min-height: 100vh;

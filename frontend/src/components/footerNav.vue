@@ -137,6 +137,14 @@ export default {
 	height: 100%;
 	object-fit: contain; 
 }
+
+/* #NavBudgetsIcon svg :hover {
+	fill: red;
+	width: 100%;
+	height: 100%;
+	object-fit: contain; /* Ensures SVG scales without distortion 
+} */
+
 #NavHomeIcon svg {
 	width: 100%;
 	height: 100%;

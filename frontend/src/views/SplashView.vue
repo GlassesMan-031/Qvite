@@ -9,33 +9,39 @@
             alt="QVITE Logo"
             fluid
           />
-          <p class="lower-header">the sleek finance tracker</p>
+          <h3 class="lower-header">the sleek finance tracker</h3>
         </BCol>
       </BCol>
+
       <BContainer fluid class="formContainer">
         <BRow>
-          <BCol cols="10">
+          <BCol cols="12" class="d-flex flex-column align-items-center">
             <div class="form-input">
-              <Input
+              <BaseInput
                 id="input-1"
-                v-model="formData.productName"
-                type="text"
                 placeholder="Username"
+                v-model="formData.username"
               />
             </div>
-          </BCol>
-          <div class="form-input">
-            <Input
-              id="input-2"
-              v-model="formData.productName"
-              type="text"
-              placeholder="Password"
-            />
-          </div>
-          <BCol cols="10">
+            <div class="form-input">
+              <BaseInput
+                id="input-2"
+                type="password"
+                placeholder="Password"
+                v-model="formData.password"
+              />
+            </div>
             <div id="login-container">
-              <RouterLink to="/home" @click.prevent id="login-button"
-                >Log in</RouterLink
+              <RouterLink to="/home" @click.prevent id="login-button">
+                Log in
+              </RouterLink>
+            </div>
+            <div class="bottom-links-wrapper">
+              <RouterLink to="/create" class="bottom-links"
+                >Create Account</RouterLink
+              >
+              <RouterLink to="/recover" class="bottom-links"
+                >Forgot password?</RouterLink
               >
             </div>
           </BCol>
@@ -48,9 +54,11 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink } from "vue-router";
+import BaseInput from "../components/BaseInput.vue";
 
 const formData = ref({
-  productName: "",
+  username: "",
+  password: "",
 });
 </script>
 
@@ -58,15 +66,12 @@ const formData = ref({
 .splash-box {
   position: relative;
   z-index: 10;
-  /* background-color: white; */
   padding: 2rem;
   border-radius: 12px;
   display: inline-block;
-  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
 }
 
 .logo-splash {
-  /* display: block; */
   max-width: 300px;
   z-index: 10;
   position: relative;
@@ -98,15 +103,11 @@ body {
   color: #b0a695;
 }
 
-.intro-text {
-  margin-top: -14px;
-}
 .lower-header {
   font-family: "Cal Sans", sans-serif;
   font-weight: 400;
   font-style: bolder;
   color: #2c2a29;
-  /* background-color: lightcoral; */
 }
 
 .form-input {
@@ -115,43 +116,19 @@ body {
   margin: 12px;
   padding: 12px;
   place-content: center;
-
-  /* background-color: lightcoral; */
-}
-
-#input-1 {
-  background-color: #f5f5f5;
-  font-family: "Cal Sans", sans-serif;
-  color: #2c2a29;
-  height: 40px;
-  width: 240px;
-  text-align: center;
-  border-radius: 6px;
-  border: none;
-  box-shadow: inset 5px 3px 3px #776b5d;
-}
-
-#input-2 {
-  background-color: #f5f5f5;
-  font-family: "Cal Sans", sans-serif;
-  color: #2c2a29;
-  height: 40px;
-  width: 240px;
-  text-align: center;
-  border-radius: 6px;
-  border: none;
-  box-shadow: inset 5px 3px 3px #776b5d;
+  z-index: 10;
+  position: relative;
 }
 
 #login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px; /* Slightly taller for comfort */
+  height: 60px;
 }
 
 #login-button {
-  display: inline-block; /* Ensures it's treated like a button */
+  display: inline-block;
   background-color: #5b8e7d;
   font-family: "Cal Sans", sans-serif;
   margin: 12px auto;
@@ -166,6 +143,27 @@ body {
   text-decoration: none;
   z-index: 10;
   position: relative;
+}
+
+.bottom-links-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  z-index: 10;
+  position: relative;
+}
+
+.bottom-links {
+  color: #2c2a29;
+  font-weight: bold;
+  font-family: "Cal Sans", sans-serif;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .darkerG-Bold {

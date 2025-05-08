@@ -129,9 +129,9 @@
           <!-- Create Account button -->
           <BRow>
             <BCol>
-              <b-button v-on="handleSubmit" class="create-button" type="submit">
-                Create account
-              </b-button>
+              <button class="create-button" type="submit" :disabled="isLoading">
+                {{ isLoading ? "Creating..." : "Create account" }}
+              </button>
             </BCol>
           </BRow>
         </form>
@@ -147,46 +147,53 @@ const name = ref("");
 const username = ref("");
 const email = ref("");
 const password = ref("");
+const isLoading = ref(false);
 
 const handleSubmit = async () => {
-  if (!name.value || !username.value || !email.value || !password.value) {
-    alert("Please fill in all fields.");
-    return;
-  }
-  // Check if user already exists
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/check-user?username=${username.value}&email=${email.value}`
+    isLoading.value = true;
+
+    // Check if user already exists
+    const responseCheck = await fetch(
+      `http://localhost:3000/api/check-user?usersName=${encodeURIComponent(
+        username.value
+      )}&usersEmail=${encodeURIComponent(email.value)}`
     );
-    const data = await response.json();
-    if (data.exists) {
-      alert("A User with this username or email already exists.");
+    const dataCheck = await responseCheck.json();
+    if (dataCheck.exists) {
+      alert("A user with this username or email already exists.");
       return;
     }
-  } catch (err) {
-    console.error("Error checking user: ", err.message);
-    alert("Could not check user.");
-  }
-  // Create new user if not existing
-  try {
+
+    // create new user if not exists
     const response = await fetch("http://localhost:3000/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: username.value,
-        email: email.value,
-        password: password.value,
+        name: name.value,
+        usersName: username.value, // Map username to usersName
+        usersEmail: email.value, // Map email to usersEmail
+        usersPassword: password.value, // Map password to usersPassword
       }),
     });
+
     if (!response.ok) {
-      throw new Error("Error while creating user");
+      console.log("!Response.ok: ", !response.ok);
+      console.log("Response status: ", response.status);
+
+      const result = await response.json(); // Read once as JSON
+      console.log("Response body:", result);
+      throw new Error(result.message || "Error creating user.");
     }
+
     const result = await response.json();
-    console.log("Result: ", result);
+    console.log("User created: ", result);
     alert("User created successfully!");
   } catch (err) {
-    console.error("Error: ", err.message); // handle any errors in the catch block
-    alert("Error creating user.");
+    console.error("Error: ", err.message);
+    alert(`Error: ${err.message}`);
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>

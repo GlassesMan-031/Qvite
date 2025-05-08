@@ -25,18 +25,12 @@ export default createRouter({
       path: "/home",
       name: "home"
     },
-
-    		{
-
-			component: loginView,
-			path: "/login",
-      name: "login"
-
+   {
 			component: createView,
 			path: "/create",
       name: "create"
-
-		}
+    }
+		
 
    
   ],

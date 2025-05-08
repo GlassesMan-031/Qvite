@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "./views/HomeView.vue";
 import SplashView from "./views/SplashView.vue";
 import transactionView from "./views/transactionView.vue";
-import loginView from "./views/LoginView.vue"
+import createView from "./views/createView.vue"
 
 export default createRouter({
   history: createWebHashHistory(),
@@ -21,8 +21,8 @@ export default createRouter({
       path: "/home",
     },
     		{
-			component: loginView,
-			path: "/login",
+			component: createView,
+			path: "/create",
 		}
   ],
 });

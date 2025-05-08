@@ -116,3 +116,18 @@ exports.deleteUser = async (req, res) => {
     });
   }
 };
+
+// CHECK IF USER EXISTS
+exports.checkUserExists = async (req, res) => {
+  const { usersName, usersEmail } = req.body;
+
+  try {
+    const exists = await userService.checkUserExists(usersName, usersEmail);
+    return res.json({ exists });
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+

@@ -100,7 +100,7 @@ nav {
 }
 main {
 	background-color: #5b8e7d;
-	min-height: 100vh;
+	min-height: 100vh - 60px;
 }
 .account-dashboard {
 	min-height: 20vh;

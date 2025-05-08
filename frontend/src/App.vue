@@ -1,9 +1,22 @@
 <template>
-  <RouterView />
+	<main>
+		<RouterView />
+	</main>
+	<!-- v-if decides when to add the footernav and where to exclude it. -->
+	<footer v-if="['home', 'transaction'].includes($route.name)">
+		<footerNav />
+	</footer>
 </template>
 
-<script setup>
+<script>
 import { ref, computed } from "vue";
+import footerNav from "./components/footerNav.vue";
+
+export default {
+	components: {
+		footerNav,
+	},
+};
 </script>
 
 <style scoped></style>

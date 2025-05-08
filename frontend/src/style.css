@@ -8,8 +8,6 @@
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #5b8e7d;
 
-
-
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -29,7 +27,9 @@ body {
 	margin: 0;
 	place-items: center;
 	min-width: 320px;
-	min-height: 100vh;
+	/* min-height: 100vh; */
+
+	overflow: hidden;
 }
 
 h1 {

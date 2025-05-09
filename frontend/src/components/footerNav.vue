@@ -1,4 +1,5 @@
 <template>
+
 	<section id="sectionFooter">
 		<!-- renders navbar using vfor -->
 		<div
@@ -162,13 +163,13 @@ export default {
 
 <style scoped>
 #sectionFooter {
-	display: flex;
-	justify-content: space-around;
-	background-color: #ebe3d5;
-	min-height: 50px;
-	position: fixed;
-	bottom: 0;
-	width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  background-color: #ebe3d5;
+  min-height: 50px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
 }
 
 .navbar {
@@ -225,17 +226,17 @@ export default {
 }
 
 .nav-icon {
-	color: #fff; /* Default stroke color */
-	width: 24px;
-	height: 24px;
+  color: #fff; /* Default stroke color */
+  width: 24px;
+  height: 24px;
 }
 
 .active-container .nav-icon {
-	color: #f0f0f0; /* Slightly lighter stroke for active icon */
+  color: #f0f0f0; /* Slightly lighter stroke for active icon */
 }
 
 .icon-container:hover .nav-icon {
-	color: #f0f0f0; /* Hover effect */
+  color: #f0f0f0; /* Hover effect */
 }
 
 .navIcon {

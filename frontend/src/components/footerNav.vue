@@ -1,5 +1,6 @@
 <template>
 	<section id="sectionFooter">
+		<!-- renders navbar using vfor -->
 		<div
 			v-for="item in navItems"
 			:key="item.name"
@@ -21,20 +22,55 @@
 					"
 					class="active-container"
 				>
-					<svg class="nav-icon" width="24" height="24">
-						<path :d="item.iconPath" stroke="green" fill="none" />
+					<svg
+						class="nav-icon"
+						width="52"
+						height="52"
+						viewBox="0 0 52 52"
+						place-items="center"
+					>
+						<path
+							v-for="(path, index) in Array.isArray(item.iconPath)
+								? item.iconPath
+								: [item.iconPath]"
+							:key="index"
+							:d="path"
+							stroke="#ebe3d5"
+							fill="none"
+							viewBox="0 0 52 52"
+							width="52"
+							height="52"
+							transform="scale(2)"
+						/>
 					</svg>
 				</div>
 				<!-- Inactive state -->
 				<div v-else>
-					<svg class="nav-icon" width="24" height="24">
-						<path :d="item.iconPath" stroke="red" fill="none" />
+					<svg
+						class="nav-icon"
+						width="52"
+						height="52"
+						viewBox="0 0 52 52"
+						place-items="center"
+					>
+						<path
+							v-for="(path, index) in Array.isArray(item.iconPath)
+								? item.iconPath
+								: [item.iconPath]"
+							:key="index"
+							:d="path"
+							stroke="#776B5D"
+							fill="none"
+							transform="scale(2)"
+						/>
 					</svg>
 				</div>
 			</router-link>
 		</div>
 	</section>
 </template>
+
+<!-- The array called navItems holds all the svgfiles for the navbar -->
 
 <script>
 export default {
@@ -56,15 +92,19 @@ export default {
 				},
 				{
 					name: "add",
-					path: "/addTransaction",
+					path: "/transaction",
 					iconPath:
 						"M8 12H12M12 12H16M12 12V16M12 12V8M4 16.8002V7.2002C4 6.08009 4 5.51962 4.21799 5.0918C4.40973 4.71547 4.71547 4.40973 5.0918 4.21799C5.51962 4 6.08009 4 7.2002 4H16.8002C17.9203 4 18.4801 4 18.9079 4.21799C19.2842 4.40973 19.5905 4.71547 19.7822 5.0918C20.0002 5.51962 20.0002 6.07967 20.0002 7.19978V16.7998C20.0002 17.9199 20.0002 18.48 19.7822 18.9078C19.5905 19.2841 19.2842 19.5905 18.9079 19.7822C18.4805 20 17.9215 20 16.8036 20H7.19691C6.07899 20 5.5192 20 5.0918 19.7822C4.71547 19.5905 4.40973 19.2842 4.21799 18.9079C4 18.4801 4 17.9203 4 16.8002Z", // add icon SVG path
 				},
 				{
 					name: "scan",
 					path: "/scan",
-					iconPath:
-						"M15.0858 3.58579C14.7107 3.21071 14.202 3 13.6716 3H10.3284C9.79799 3 9.28929 3.21071 8.91421 3.58579L8.08579 4.41421C7.71071 4.78929 7.20201 5 6.67157 5H5C3.89543 5 3 5.89543 3 7L3 17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H17.3284C16.798 5 16.2893 4.78929 15.9142 4.41421L15.0858 3.58579Z", // scan icon SVG path
+					iconPath: [
+						// Camera frame
+						"M15.0858 3.58579C14.7107 3.21071 14.202 3 13.6716 3H10.3284C9.79799 3 9.28929 3.21071 8.91421 3.58579L8.08579 4.41421C7.71071 4.78929 7.20201 5 6.67157 5H5C3.89543 5 3 5.89543 3 7L3 17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H17.3284C16.798 5 16.2893 4.78929 15.9142 4.41421L15.0858 3.58579Z",
+						// Camera lens
+						"M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z",
+					],
 				},
 				{
 					name: "settings",
@@ -93,80 +133,38 @@ export default {
 	background-color: #333; /* Dark navbar background */
 	display: flex;
 	justify-content: space-around;
-	padding: 10px;
 }
 
 .icon-container {
-	padding: 5px;
-	border-radius: 5px; /* Rounded corners for container */
+	display: flex;
+	min-width: 60px;
+	min-height: 60px;
+
+	justify-content: center;
+	align-items: center;
 }
 
 .active-container {
-	background-color: #1a1a1a; /* Darker background for active icon */
-	padding: 5px; /* Match padding for alignment */
-	border-radius: 5px;
+	background-color: #776b5d;
+	display: flex;
+	place-items: center;
+	min-width: 60px;
+	min-height: 60px;
+	align-items: center;
+	justify-content: center;
 }
 
 .nav-icon {
-	color: #fff; /* Default stroke color */
-	width: 24px;
-	height: 24px;
+	color: #fff;
+	min-width: 44px;
+	min-height: 44px;
 }
 
 .active-container .nav-icon {
-	color: #f0f0f0; /* Slightly lighter stroke for active icon */
+	color: #f0f0f0;
 }
 
 .icon-container:hover .nav-icon {
-	color: #f0f0f0; /* Hover effect */
+	color: #f0f0f0;
 }
-
-.navIcon {
-	place-items: center;
-	margin: 10px;
-	width: 40px;
-	height: 40px;
-}
-/* 
-#NavBudgetsIcon {
-	width: 40px;
-	height: 40px;
-}
-#NavBudgetsIcon svg {
-	width: 100%;
-	height: 100%;
-	object-fit: contain; 
-}
-
-/* #NavBudgetsIcon svg :hover {
-	fill: red;
-	width: 100%;
-	height: 100%;
-	object-fit: contain; /* Ensures SVG scales without distortion 
-} */
-
-#NavHomeIcon svg {
-	width: 100%;
-	height: 100%;
-	object-fit: contain; 
-}
-
-#NavAddIcon svg {
-	width: 100%;
-	height: 100%;
-	object-fit: contain; 
-}
-
-#NavScanIcon svg {
-	width: 100%;
-	height: 100%;
-	object-fit: contain; 
-}
-
-#NavSettingsIcon svg {
-	width: 100%;
-	height: 100%;
-	object-fit: contain; 
-}
- */
 </style>

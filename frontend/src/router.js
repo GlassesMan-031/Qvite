@@ -3,9 +3,10 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "./views/homeView.vue";
 import SplashView from "./views/SplashView.vue";
 import transactionView from "./views/transactionView.vue";
-
 import createView from "./views/createView.vue"
 import BudgetsView from "./views/BudgetsView.vue";
+import SettingsView from "./views/SettingsView.vue";
+import ScanView from "./views/ScanView.vue";
 
 
 
@@ -39,6 +40,17 @@ export default createRouter({
       component: createView,
 			path: "/create",
       name: "create"
+    },
+    {
+      component: SettingsView,
+			path: "/settings",
+      name: "settings"
+    }
+    ,
+    {
+      component: ScanView,
+			path: "/scan",
+      name: "scan"
     }
    
   ],

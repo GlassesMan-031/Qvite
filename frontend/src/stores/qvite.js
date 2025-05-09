@@ -1,25 +1,25 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-
-
-export let useQvite = defineStore("qvite", {
+export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
+    usersInfo:null, // SplashView.vue
+    userName:"", // SplashView.vue
+    userPassword:"", // SplashView.vue
 
-    users: null,
-    name:"",
-    username:"",
-    email: "",
-    password: "",
-    isLoading:false,
-
+    users: null, // CreateView.vue
+    name:"", // CreateView.vue
+    username:"", // CreateView.vue
+    email: "", // CreateView.vue
+    password: "", // CreateView.vue
+    isLoading:false, // CreateView.vue
   }),
   actions: {
     
     async getUsers() {
-      let response = await fetch("http://localhost:3000/api/users");
-      let users = await response.json();
+      const response = await fetch("http://localhost:3000/api/users");
+      const users = await response.json();
       console.log(users);
     },
 
@@ -91,43 +91,23 @@ export let useQvite = defineStore("qvite", {
         this.isLoading = false;
       }
     },
-        // add global frontend-functions here:
-
-     // shows users credentials in console
-    async showLogin() {
-      try {
-        for (let i = 0; i < this.usersInfo.users.length; i++) {
-          console.log(this.usersInfo.users[i].usersName);
-          console.log(this.usersInfo.users[i].usersPassword);
-        }
-      } catch (error) {
-        console.error(" fetch is fucked up:", error);
-      }
-    },
-  //  Fetches the usercredentials from MySQL
     async getUsersSplash() {
       try {
         const response = await fetch("http://localhost:3000/api/users");
-    
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-    
-        this.usersInfo = await response.json();
-    
-        this.showLogin();
 
+        this.usersInfo = await response.json();
         return this.usersInfo;
       } catch (error) {
         console.error("Error at user fetch:", error);
+        throw error;
       }
-      
     },
+        // add global frontend-functions here:
 
+    
   },
 });
-
-
-
-
-

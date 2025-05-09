@@ -3,7 +3,13 @@
 		<RouterView />
 	</main>
 	<!-- v-if decides when to add the footernav and where to exclude it. -->
-	<footer v-if="['home', 'transaction'].includes($route.name)">
+	<footer
+		v-if="
+			['home', 'transaction', 'budgets', 'scan', 'settings'].includes(
+				$route.name
+			)
+		"
+	>
 		<footerNav />
 	</footer>
 </template>

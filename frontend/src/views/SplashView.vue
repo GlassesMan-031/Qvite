@@ -20,7 +20,7 @@
               <BaseInput
                 id="input-1"
                 placeholder="Username"
-                v-model="formData.username"
+                v-model="loginData.username"
               />
             </div>
             <div class="form-input">
@@ -28,13 +28,13 @@
                 id="input-2"
                 type="password"
                 placeholder="Password"
-                v-model="formData.password"
+                v-model="loginData.Football"
               />
             </div>
             <div id="login-container">
-              <RouterLink to="/home" @click.prevent id="login-button">
+              <button to="/home" @click="getUsersSplash" id="login-button">
                 Log in
-              </RouterLink>
+              </button>
             </div>
             <div class="bottom-links-wrapper">
               <RouterLink to="/create" class="bottom-links"
@@ -56,9 +56,50 @@ import { ref } from "vue";
 import { RouterLink } from "vue-router";
 import BaseInput from "../components/BaseInput.vue";
 
-const formData = ref({
-  username: "",
-  password: "",
+let usersInfo;
+async function getUsersSplash() {
+  try {
+    const response = await fetch("http://localhost:3000/api/users");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    usersInfo = await response.json();
+    console.log(
+      "User information:",
+      usersInfo.users[i].usersName,
+      usersInfo.users[i].usersPassword
+    );
+    return usersInfo;
+  } catch (error) {
+    console.error("Error at user fetch:", error);
+  }
+  showLogin();
+}
+
+async function showLogin() {
+  try {
+    for (let i = 0; i < usersInfo.users.length; i++) {
+      console.log(usersInfo.users[i].usersName);
+      console.log(usersInfo.users[i].usersPassword);
+    }
+  } catch (error) {
+    console.error("Error at user fetch:", error);
+  }
+}
+async function compareLogin() {
+  // fetching users upon buttonclick
+  // input-1 = usersName > compare input-1 to usersName in db
+  // input-2 = usersPassword > compare input-2 to usersPassword in db
+  // locks signin button unless fields have content
+  // redirects to /home if conditions meet
+}
+
+// switched out password to Football for simple security
+let loginData = ref({
+  username: null,
+  Football: null,
 });
 </script>
 

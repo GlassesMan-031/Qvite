@@ -18,6 +18,14 @@
             </BCol>
           </BRow>
 
+          <!-- Alerts for error and success messages -->
+          <alert v-if="errorMessage" variant="danger" show>
+            {{ errorMessage }}
+          </alert>
+          <alert v-if="successMessage" variant="success" show>
+            {{ successMessage }}
+          </alert>
+
           <!-- Firstname & Lastname input fields -->
           <BRow>
             <BCol class="input-with-icon">
@@ -37,7 +45,7 @@
                 <input
                   type="text"
                   id="name"
-                  v-model="name"
+                  v-model="qviteStore.name"
                   placeholder="Your first and last name"
                   required
                 />
@@ -64,7 +72,7 @@
                 <input
                   type="text"
                   id="username"
-                  v-model="username"
+                  v-model="qviteStore.username"
                   placeholder="Username"
                   required
                 />
@@ -91,7 +99,7 @@
                 <input
                   type="email"
                   id="email"
-                  v-model="email"
+                  v-model="qviteStore.email"
                   placeholder="Email"
                   required
                 />
@@ -117,7 +125,7 @@
                 </svg>
                 <input
                   type="password"
-                  v-model="password"
+                  v-model="qviteStore.password"
                   id="password"
                   placeholder="Password"
                   required
@@ -129,8 +137,12 @@
           <!-- Create Account button -->
           <BRow>
             <BCol>
-              <button class="create-button" type="submit" :disabled="isLoading">
-                {{ isLoading ? "Creating..." : "Create account" }}
+              <button
+                class="create-button"
+                type="submit"
+                :disabled="qviteStore.isLoading"
+              >
+                {{ qviteStore.isLoading ? "Creating..." : "Create account" }}
               </button>
             </BCol>
           </BRow>
@@ -141,61 +153,81 @@
 </template>
 
 <script setup>
+import { useQvite } from "../stores/qvite";
 import { ref } from "vue";
-
-const name = ref("");
-const username = ref("");
-const email = ref("");
-const password = ref("");
-const isLoading = ref(false);
+const qviteStore = useQvite();
+const errorMessage = ref("");
+const successMessage = ref("");
 
 const handleSubmit = async () => {
+  errorMessage.value = "";
+  successMessage.value = "";
+
   try {
-    isLoading.value = true;
-
-    // Check if user already exists
-    const responseCheck = await fetch(
-      `http://localhost:3000/api/check-user?usersName=${encodeURIComponent(
-        username.value
-      )}&usersEmail=${encodeURIComponent(email.value)}`
-    );
-    const dataCheck = await responseCheck.json();
-    if (dataCheck.exists) {
-      alert("A user with this username or email already exists.");
-      return;
-    }
-
-    // create new user if not exists
-    const response = await fetch("http://localhost:3000/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name.value,
-        usersName: username.value, // Map username to usersName
-        usersEmail: email.value, // Map email to usersEmail
-        usersPassword: password.value, // Map password to usersPassword
-      }),
-    });
-
-    if (!response.ok) {
-      console.log("!Response.ok: ", !response.ok);
-      console.log("Response status: ", response.status);
-
-      const result = await response.json(); // Read once as JSON
-      console.log("Response body:", result);
-      throw new Error(result.message || "Error creating user.");
-    }
-
-    const result = await response.json();
-    console.log("User created: ", result);
-    alert("User created successfully!");
+    const result = await qviteStore.registerUser();
+    successMessage.value = result.message || "Account created successfully";
   } catch (err) {
-    console.error("Error: ", err.message);
-    alert(`Error: ${err.message}`);
-  } finally {
-    isLoading.value = false;
+    errorMessage.value = err.message || "Failed to create account";
   }
 };
+
+// Old version of the code without Pinia store.
+
+// import { ref } from "vue";
+
+// const name = ref("");
+// const username = ref("");
+// const email = ref("");
+// const password = ref("");
+// const isLoading = ref(false);
+
+// const handleSubmit = async () => {
+//   try {
+//     isLoading.value = true;
+
+//     // Check if user already exists
+//     const responseCheck = await fetch(
+//       `http://localhost:3000/api/check-user?usersName=${encodeURIComponent(
+//         username.value
+//       )}&usersEmail=${encodeURIComponent(email.value)}`
+//     );
+//     const dataCheck = await responseCheck.json();
+//     if (dataCheck.exists) {
+//       alert("A user with this username or email already exists.");
+//       return;
+//     }
+
+//     // create new user if not exists
+//     const response = await fetch("http://localhost:3000/api/users", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         name: name.value,
+//         usersName: username.value, // Map username to usersName
+//         usersEmail: email.value, // Map email to usersEmail
+//         usersPassword: password.value, // Map password to usersPassword
+//       }),
+//     });
+
+//     if (!response.ok) {
+//       console.log("!Response.ok: ", !response.ok);
+//       console.log("Response status: ", response.status);
+
+//       const result = await response.json(); // Read once as JSON
+//       console.log("Response body:", result);
+//       throw new Error(result.message || "Error creating user.");
+//     }
+
+//     const result = await response.json();
+//     console.log("User created: ", result);
+//     alert("User created successfully!");
+//   } catch (err) {
+//     console.error("Error: ", err.message);
+//     alert(`Error: ${err.message}`);
+//   } finally {
+//     isLoading.value = false;
+//   }
+// };
 </script>
 
 <style scoped>

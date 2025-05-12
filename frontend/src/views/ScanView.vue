@@ -1,25 +1,16 @@
 <template>
 	<main>
-		<div class="account-dashboard">
+		<div class="scan-dashboard">
 			<BContainer class="ad-top">
-				<BRow cols="2">
+				<BRow cols="1">
 					<BCol><h1 class="calsans-text">SCAN</h1></BCol>
-				</BRow>
-
-				<BRow>
-					<BCol><p>todays date is 07/05</p></BCol>
+					<BCol><p>This feature is not available in QVITE v.1</p></BCol>
 				</BRow>
 			</BContainer>
 			<BContainer class="ad-mid">
 				<BRow cols="1"></BRow>
-				<p>current balance:</p></BContainer
+				<p>We are still working on it. Come back later.</p></BContainer
 			>
-			<BContainer class="ad-bot">
-				<BRow cols="3">
-					<BCol><h1 class="hugetext calsans-text">4200</h1> </BCol>
-				</BRow>
-				<Bcol><p>sek</p></Bcol>
-			</BContainer>
 		</div>
 		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
 
@@ -33,6 +24,10 @@
 					<BCol><h1 class="calsans-text">SCAN RECIEPT</h1></BCol>
 				</BRow>
 			</BContainer>
+		</div>
+
+		<div class="worker-holder">
+			<img src="/work.gif" />
 		</div>
 	</main>
 </template>
@@ -51,7 +46,7 @@ main {
 	background-color: #5b8e7d;
 	min-height: 100vh - 60px;
 }
-.account-dashboard {
+.scan-dashboard {
 	min-height: 20vh;
 	z-index: 2;
 	background-color: #ebe3d5;
@@ -72,7 +67,7 @@ p {
 .ad-top {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 }
 .ad-top h1 {
 	font-size: 3rem;
@@ -81,9 +76,9 @@ p {
 .ad-mid {
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: flex-end;
-	height: 60px;
+	height: 30px;
 }
 
 .ad-bot {
@@ -162,6 +157,11 @@ p {
 	flex-direction: row;
 	justify-content: space-between;
 	place-items: center;
+	text-decoration: dashed;
+}
+.sr-button h1 {
+	color: #bc4b51;
+	text-decoration: line-through;
 }
 
 .calsans-text {
@@ -173,5 +173,24 @@ p {
 
 .hugetext {
 	font-size: 4rem;
+}
+
+.worker-holder {
+	min-height: 50vh;
+	z-index: 2;
+	background-color: #ebe3d5;
+	overflow: hidden;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 40px 20px 40px 20px;
+	/* padding: 6px; */
+	box-shadow: 0px 7px 15px #2c2a29;
+}
+
+.worker-holder img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
 }
 </style>

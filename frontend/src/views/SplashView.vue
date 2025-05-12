@@ -131,11 +131,11 @@ onMounted(() => {
       speed: {
         x: {
           min: 0,
-          max: 0.1,
+          max: 0.5,
         },
         y: {
           min: 0,
-          max: 0.1,
+          max: 0.5,
         },
       },
       colors: {

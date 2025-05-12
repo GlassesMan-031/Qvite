@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-
+import { useLocalStorage } from "@vueuse/core";
 export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
+
+    loggedInUser: useLocalStorage("loggedInUser", ""),
+
     usersInfo: null, // SplashView.vue
     userName: "", // SplashView.vue
     userPassword: "", // SplashView.vue

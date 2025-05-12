@@ -11,6 +11,7 @@
 				<BRow cols="1"></BRow>
 				<p>We are still working on it. Come back later.</p></BContainer
 			>
+
 		</div>
 		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
 
@@ -34,6 +35,22 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useQvite } from "../stores/qvite";
+
+const qvite = useQvite();
+let balance = ref(getBalance());
+// let printBalance = balance
+async function getBalance() {
+  const response = await fetch(
+    `http://localhost:3000/api/${qvite.loggedInUser}/account`
+  );
+
+  const balanceInput = await response.json();
+  balance.value = balanceInput.account[0].accountBalance;
+  console.log("this is the current received balance:", balance);
+
+  return balance;
+}
 </script>
 
 <style scoped>

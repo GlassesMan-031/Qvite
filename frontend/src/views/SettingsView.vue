@@ -10,16 +10,6 @@
 					<BCol><p>todays date is 07/05</p></BCol>
 				</BRow>
 			</BContainer>
-			<BContainer class="ad-mid">
-				<BRow cols="1"></BRow>
-				<p>current balance:</p></BContainer
-			>
-			<BContainer class="ad-bot">
-				<BRow cols="3">
-					<BCol><h1 class="hugetext calsans-text">4200</h1> </BCol>
-				</BRow>
-				<Bcol><p>sek</p></Bcol>
-			</BContainer>
 		</div>
 		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
 

@@ -1,13 +1,13 @@
 <template>
 	<main>
-		<div class="account-dashboard">
+		<div class="budgets-dashboard">
 			<BContainer class="ad-top">
 				<BRow cols="2">
 					<BCol><h1 class="calsans-text">BUDGETS</h1></BCol>
 				</BRow>
 
 				<BRow>
-					<BCol><p>todays date is 07/05</p></BCol>
+					<!-- <BCol><p>todays date is 07/05</p></BCol> -->
 				</BRow>
 			</BContainer>
 			<BContainer class="ad-mid">
@@ -27,14 +27,13 @@
 		</div>
 		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
 
-		<div class="scanReciept-dashboard">
-			<BContainer class="sr-button">
+		<div class="add-Budget">
+			<BContainer class="ab-button">
 				<BRow cols="2">
-					<BCol
-						><img src="../assets/Icon-ScanReciept.png" alt="add icon" /></BCol
+					<BCol><img src="../assets/Icon-Add.png" alt="add icon" /></BCol
 				></BRow>
 				<BRow>
-					<BCol><h1 class="calsans-text">SCAN RECIEPT</h1></BCol>
+					<BCol><h1 class="calsans-text">CREATE NEW BUDGET</h1></BCol>
 				</BRow>
 			</BContainer>
 		</div>
@@ -72,7 +71,7 @@ main {
 	background-color: #5b8e7d;
 	min-height: 100vh - 60px;
 }
-.account-dashboard {
+.budgets-dashboard {
 	min-height: 20vh;
 	z-index: 2;
 	background-color: #ebe3d5;
@@ -167,7 +166,7 @@ p {
 	align-items: center;
 }
 
-.scanReciept-dashboard {
+.add-Budget {
 	min-height: 60px;
 	z-index: 2;
 	background-color: #ebe3d5;
@@ -178,7 +177,7 @@ p {
 	box-shadow: 0px 7px 15px #2c2a29;
 }
 
-.sr-button {
+.ab-button {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

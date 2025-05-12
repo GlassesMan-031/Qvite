@@ -56,9 +56,10 @@ async function getBalance() {
   const balanceInput = await response.json();
   balance.value = balanceInput.account[0].accountBalance;
   console.log("this is the current received balance:", balance);
-
+	
   return balance;
 }
+
 </script>
 
 <style scoped>

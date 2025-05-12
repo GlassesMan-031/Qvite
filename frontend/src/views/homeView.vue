@@ -19,7 +19,11 @@
       >
       <BContainer class="ad-bot">
         <BRow cols="3">
-          <BCol><h1 class="hugetext calsans-text">4200</h1> </BCol>
+          <BCol
+            ><h1 class="hugetext calsans-text">
+              {{ balance }}
+            </h1>
+          </BCol>
         </BRow>
         <Bcol><p>sek</p></Bcol>
       </BContainer>
@@ -94,8 +98,23 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useQvite } from "../stores/qvite";
+// import { get } from "mongoose";
 
 const qvite = useQvite();
+let balance = ref(getBalance());
+// let printBalance = balance
+async function getBalance() {
+  const response = await fetch(
+    `http://localhost:3000/api/${qvite.loggedInUser}/account`
+  );
+
+  const balanceInput = await response.json();
+  balance.value = balanceInput.account[0].accountBalance;
+  console.log("this is the current received balance:", balance);
+
+  return balance;
+}
+// getBalance();
 </script>
 
 <style scoped>

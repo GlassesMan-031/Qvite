@@ -5,7 +5,7 @@ export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
 
-    loggedInUser: useLocalStorage("loggedInUser", ""),
+    loggedInUser: useLocalStorage("loggedInUser", {}),
 
     usersInfo: null, // SplashView.vue
     userName: "", // SplashView.vue

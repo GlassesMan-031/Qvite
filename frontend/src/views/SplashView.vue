@@ -151,8 +151,8 @@ onMounted(() => {
       },
       blending: "screen",
       opacity: {
-        center: 1,
-        edge: 1,
+        center: 0.8,
+        edge: 0.8,
       },
       skew: 0,
       shapes: ["s"],

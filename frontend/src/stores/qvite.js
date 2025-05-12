@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useLocalStorage } from "@vueuse/core";
-<<<<<<< Updated upstream
 export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
@@ -18,24 +17,6 @@ export const useQvite = defineStore("qvite", {
     createEmail: "", // CreateView.vue
     createPassword: "", // CreateView.vue
     isLoading: false, // CreateView.vue
-=======
-
-export const useQvite = defineStore("qvite", {
-  state: () => ({
-    // set variables here
-    usersInfo: null, // SplashView.vue
-    userName: "", // SplashView.vue
-    userPassword: "", // SplashView.vue
-
-    users: null, // CreateView.vue
-    name: "", // CreateView.vue
-    username: "", // CreateView.vue
-    email: "", // CreateView.vue
-    password: "", // CreateView.vue
-    isLoading: false, // CreateView.vue
-
-    loggedinUser: useLocalStorage("loggedinUser", ""),
->>>>>>> Stashed changes
   }),
   actions: {
     async getUsers() {

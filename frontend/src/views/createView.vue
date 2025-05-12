@@ -44,8 +44,8 @@
                 </svg>
                 <input
                   type="text"
-                  id="name"
-                  v-model="qviteStore.name"
+                  id="createName"
+                  v-model="qviteStore.createName"
                   placeholder="Your first and last name"
                   required
                 />
@@ -71,8 +71,8 @@
                 </svg>
                 <input
                   type="text"
-                  id="username"
-                  v-model="qviteStore.username"
+                  id="createUsername"
+                  v-model="qviteStore.createUsername"
                   placeholder="Username"
                   required
                 />
@@ -98,8 +98,8 @@
                 </svg>
                 <input
                   type="email"
-                  id="email"
-                  v-model="qviteStore.email"
+                  id="createEmail"
+                  v-model="qviteStore.createEmail"
                   placeholder="Email"
                   required
                 />
@@ -125,8 +125,8 @@
                 </svg>
                 <input
                   type="password"
-                  v-model="qviteStore.password"
-                  id="password"
+                  v-model="qviteStore.createPassword"
+                  id="createPassword"
                   placeholder="Password"
                   required
                 />

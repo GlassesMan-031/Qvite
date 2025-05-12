@@ -107,8 +107,15 @@ const handleSubmit = async () => {
     }
 
     // Login successful
+<<<<<<< Updated upstream
     qvite.loggedInUser = user.usersName;
     console.log("Credentials are correct!");
+=======
+    console.log("Credentials are correct!");
+    qvite.loggedinUser = user.usersName;
+    console.log(qvite.loggedinUser);
+
+>>>>>>> Stashed changes
     router.push("/home"); // Navigate to home page
   } catch (error) {
     console.error("Login error:", error);

@@ -76,11 +76,14 @@
         </div>
       </div>
     </form>
+    <button @click="getUsers">getUsers</button>
   </main>
 </template>
 <script setup>
 import { useQvite } from "../stores/qvite";
 import { ref } from "vue";
+
+const qvite = useQvite();
 
 const formData = ref({
   recurring: false,
@@ -90,16 +93,24 @@ const formData = ref({
   date: "",
   notes: "",
 });
-// const emit = defineEmits(["submit"]);
 
-// const submit = () => {
-//   emit("submit", { ...form.value });
-// };
+async function getUsers() {
+  try {
+    const response = await fetch("http://localhost:3000/api/users");
 
-function logForm() {
-  console.log("formdata:", formData.value.notes);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const users = await response.json();
+    console.log("Användare:", users);
+    return users;
+  } catch (error) {
+    console.error("Fel vid hämtning av användare:", error);
+  }
 }
 
+// Submit form
 async function createTransaction() {
   const response = await fetch(
     "http://localhost:3000/user/account/transactions",
@@ -110,12 +121,15 @@ async function createTransaction() {
         transactionAccountId: 1,
         transactionNote: formData.value.notes,
         transactionAmount: formData.value.amount,
-        transactionBudget: formData.value.budget,
         transactionReurring: formData.value.recurring,
         transactionDate: formData.value.date,
+        transactionBudgetId: 0, // hämta budgetId
+        transactionUserId: 0, // hämta userId
       }),
     }
   );
+
+  // Reset form after submit
   formData.value = {
     recurring: false,
     budget: "",
@@ -125,8 +139,6 @@ async function createTransaction() {
     notes: "",
   };
 }
-
-const qvite = useQvite();
 </script>
 <style scoped>
 .background {

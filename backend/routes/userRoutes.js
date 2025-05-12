@@ -8,5 +8,6 @@ router.get("/api/users/:id", userController.getUser); // see inlogged user at fr
 router.post("/api/users", userController.createUser);
 router.put("/api/:usersName", userController.updateUser);
 router.delete("/api/:usersName", userController.deleteUser);
+router.get("/api/:usersName", userController.getUserInfo);
 
 module.exports = router;

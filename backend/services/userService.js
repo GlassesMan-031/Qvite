@@ -35,6 +35,22 @@ function getUser() {
   });
 }
 
+function getUserInfo(usersName) {
+  return new Promise((resolve, reject) => {
+    let sql = `SELECT *
+      FROM budgetCategory
+      INNER JOIN budget b ON budgetCategory.categoryId = b.budgetCategoryId
+      INNER JOIN account a ON b.budgetAccountId = a.accountId
+      INNER JOIN users u ON a.accountId = u.usersId
+      WHERE u.usersName = ?`;
+    let params = [usersName];
+    connectionMySQL.query(sql, params, (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    });
+  });
+}
+
 // UPDATE USER
 function updateUser(usersName, newUsersName, usersPassword, usersEmail) {
   return new Promise((resolve, reject) => {
@@ -63,7 +79,7 @@ function deleteUser(usersName) {
   });
 }
 
-// check if user exists 
+// check if user exists
 function checkUserExists(usersName, usersEmail) {
   return new Promise((resolve, reject) => {
     let sql = `
@@ -83,5 +99,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  checkUserExists
+  checkUserExists,
+  getUserInfo,
 };

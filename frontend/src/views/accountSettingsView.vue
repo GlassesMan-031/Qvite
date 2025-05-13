@@ -17,10 +17,10 @@
         >
         <BRow class="input-field">
           <BCol>
-            <input type="text" placeholder="New name" />
+            <input type="text" placeholder="New name" v-model="newUsersName" />
           </BCol>
           <BCol>
-            <button type="submit">Change Name</button>
+            <button type="submit" @click="submitName">Change Name</button>
           </BCol>
         </BRow>
       </BContainer>
@@ -63,13 +63,23 @@
         >
         <BRow class="input-field">
           <BCol>
-            <input type="password" placeholder="old password" />
+            <input
+              type="password"
+              placeholder="old password"
+              v-model="oldPass"
+            />
           </BCol>
           <BCol>
-            <input type="password" placeholder="new password" />
+            <input
+              type="password"
+              placeholder="new password"
+              v-model="newPass"
+            />
           </BCol>
           <BCol>
-            <button type="submit">Change Password</button>
+            <button type="submit" :disabled="!isPasswordValid">
+              Change Password
+            </button>
           </BCol>
         </BRow>
       </BContainer>
@@ -83,14 +93,46 @@ import { useRouter } from "vue-router";
 import { useQvite } from "../stores/qvite";
 const qvite = useQvite();
 
-const router = useRouter();
-const logOutUser = () => {
-  // Clear localStorage
-  localStorage.clear();
+// function to compare old password and new password to enable button
+const newPass = ref("");
+const oldPass = ref("");
+const newUsersName = ref("");
+const isPasswordValid = computed(() => {
+  // console.log("Checking password validity", oldPass.value, newPass.value);
+  return (
+    oldPass.value == qvite.loggedInTotallyNotPassword &&
+    newPass.value.length >= 7
+  );
+});
+const submitName = async () => {
+  try {
+    const currentName = qvite.loggedInUser;
+    const response = await fetch(`http://localhost:3000/api/${currentName}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newName: newUsersName.value }),
+    });
 
-  // Redirect to login page
-  router.push("/");
+    if (!response.ok) throw new Error("Failed to update name");
+
+    if (response.status === 204) {
+      console.log("Name updated successfully: No Content");
+    } else {
+      const result = await response.json();
+      console.log("Name updated successfully:", result);
+    }
+
+    // Update local state
+    qvite.loggedInUser = newUsersName.value;
+    newUsersName.value = "";
+  } catch (error) {
+    console.error("Error updating name:", error);
+  }
 };
+
+const router = useRouter();
 </script>
 
 <style scoped>

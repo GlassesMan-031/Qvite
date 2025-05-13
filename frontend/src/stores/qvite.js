@@ -6,6 +6,11 @@ export const useQvite = defineStore("qvite", {
     // set variables here
     accounId: null, // Store user's accountId for transactions
     loggedInUser: useLocalStorage("loggedInUser", {}),
+    loggedInEmail: useLocalStorage("loggedInEmail", {}),
+    loggedInTotallyNotPassword: useLocalStorage(
+      "loggedInTotallyNotPassword",
+      {}
+    ),
 
     usersInfo: null, // SplashView.vue
     userName: "", // SplashView.vue

@@ -80,13 +80,13 @@ const logOutUser = () => {
 
 <style scoped>
 nav {
-	vertical-align: top;
-	background-color: #5b8e7d;
-	margin-top: 0px;
+  vertical-align: top;
+  background-color: #5b8e7d;
+  margin-top: 0px;
 }
 main {
-	background-color: #5b8e7d;
-	min-height: 100vh - 60px;
+  background-color: #5b8e7d;
+  min-height: 100vh - 60px;
 }
 .account-card {
 	min-height: 20vh;
@@ -141,12 +141,12 @@ main {
 	cursor: pointer;
 }
 p {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 1.2rem;
-	color: #2c2a29;
+  font-family: "Darker Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: #2c2a29;
 }
 .ac-top {
 	display: flex;
@@ -183,10 +183,10 @@ p {
 }
 
 .calsans-text {
-	font-family: "Cal Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-	color: #2c2a29;
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #2c2a29;
 }
 .calsans-text-l {
 	font-family: "Cal Sans", sans-serif;
@@ -196,6 +196,6 @@ p {
 }
 
 .hugetext {
-	font-size: 4rem;
+  font-size: 4rem;
 }
 </style>

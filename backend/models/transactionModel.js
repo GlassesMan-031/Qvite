@@ -23,6 +23,10 @@ const transactionSchema = new mongoose.Schema({
     transactionDate: {
         type: Date,
         required: true,
+    },
+    transactionBudgetId:{
+        type: Number,
+        required: true
     }
     
    

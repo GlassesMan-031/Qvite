@@ -3,32 +3,32 @@ const router = express.Router();
 const transactionsController = require("../controllers/transactionsController");
 
 router.get(
-  "/user/account/transactions",
+  "/api/transactions",
   transactionsController.getTransactions
 );
 
-router.get("/user/account/transaction", transactionsController.getTransaction);
+router.get("/api/transaction/:id", transactionsController.getTransaction);
 
 router.post(
-  "/user/account/transactions",
+  "/api/transactions",
   transactionsController.createTransaction
 );
 
 router.put(
-  "/user/account/transactions",
+  "/api/transactions",
   transactionsController.updateTransaction
 );
 
 router.delete(
-  "/user/account/transactions",
+  "/api/transactions/:id",
   transactionsController.deleteTransaction
 );
 
-// Alternative  create endpoint for mongoose
-router.post(
-  "/user/account/transactions",
-  transactionsController.createTransactionVersionCreate
-);
+// // Alternative  create endpoint for mongoose
+// router.post(
+//   "/user/account/transactions",
+//   transactionsController.createTransactionVersionCreate
+// );
 
 // // Alternativ för att hämta en bok med obejctid
 // router.get(

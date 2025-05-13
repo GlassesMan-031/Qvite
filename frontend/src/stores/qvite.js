@@ -4,7 +4,7 @@ import { useLocalStorage } from "@vueuse/core";
 export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
-
+    accounId: null, // Store user's accountId for transactions
     loggedInUser: useLocalStorage("loggedInUser", {}),
 
     usersInfo: null, // SplashView.vue
@@ -109,6 +109,39 @@ export const useQvite = defineStore("qvite", {
         return this.usersInfo;
       } catch (error) {
         console.error("Error at user fetch:", error);
+        throw error;
+      }
+    },
+
+      // Fetch accountId using loggedInUser.usersName
+      async getUserAccount() {
+        try {
+          if (!this.loggedInUser.usersName) throw new Error("No user logged in");
+          const response = await fetch(
+            `http://localhost:3000/api/account/${this.loggedInUser.usersName}`
+          );
+          if (!response.ok) throw new Error("Failed to fetch account");
+          const data = await response.json();
+          this.accountId = data.account.accountId;
+          return data.account;
+        } catch (error) {
+          console.error("Error fetching account:", error.message);
+          throw error;
+        }
+      },
+  
+    // Fetch budgets using loggedInUser.usersName
+    async getUserBudgets() {
+      try {
+        if (!this.loggedInUser.usersName) throw new Error("No user logged in");
+        const response = await fetch(
+          `http://localhost:3000/api/budgets/${this.loggedInUser.usersName}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch budgets");
+        const data = await response.json();
+        return data.budgets;
+      } catch (error) {
+        console.error("Error fetching budgets:", error.message);
         throw error;
       }
     },

@@ -108,6 +108,8 @@ const handleSubmit = async () => {
 
     // Login successful
     qvite.loggedInUser = user.usersName;
+    qvite.loggedInEmail = user.usersEmail;
+    qvite.loggedInTotallyNotPassword = user.usersPassword;
     console.log("Credentials are correct!");
     router.push("/home"); // Navigate to home page
   } catch (error) {

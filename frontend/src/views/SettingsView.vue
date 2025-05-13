@@ -1,26 +1,63 @@
 <template>
 	<main>
-		<div class="account-dashboard">
-			<BContainer class="ad-top">
-				<BRow cols="2">
-					<BCol><h1 class="calsans-text">SETTINGS</h1></BCol>
-				</BRow>
-
-				<BRow>
-					<BCol><p>todays date is 07/05</p></BCol>
-				</BRow>
-			</BContainer>
+		<div class="account-card">
+			<router-link to="/settings-account">
+				<BContainer class="ac-top">
+					<BRow>
+						<BCol><h1 class="calsans-text">Account</h1></BCol> </BRow
+					><BRow>
+						<BCol>
+							<p>
+								In this tab you can change your personal settings like username
+								password and email.
+							</p></BCol
+						></BRow
+					>
+				</BContainer>
+			</router-link>
 		</div>
-		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
+		<div class="balance-card">
+			<router-link to="/settings-balance">
+				<BContainer class="bal-top">
+					<BRow cols="2">
+						<BCol><h1 class="calsans-text">Balance</h1></BCol>
+					</BRow>
+					<BRow>
+						<BCol>
+							<p>
+								In this tab you can change your totalt balance that you want to
+								visualize in the app.
+							</p></BCol
+						></BRow
+					>
+				</BContainer>
+			</router-link>
+		</div>
 
-		<div class="scanReciept-dashboard">
-			<BContainer class="sr-button">
+		<div class="budgets-card">
+			<router-link to="/settings-budget">
+				<BContainer class="bud-top">
+					<BRow cols="2">
+						<BCol><h1 class="calsans-text">Budget</h1></BCol> </BRow
+					><BRow>
+						<BCol>
+							<p>
+								In this tab you can edit your budgets. You can change the amount
+								used and what amount it should have from the start.
+							</p></BCol
+						></BRow
+					>
+				</BContainer>
+			</router-link>
+		</div>
+
+		<div class="logout-card" v-on:click="logOutUser">
+			<BContainer class="lo-button">
 				<BRow cols="2">
-					<BCol
-						><img src="../assets/Icon-ScanReciept.png" alt="add icon" /></BCol
-				></BRow>
+					<BCol> </BCol>
+				</BRow>
 				<BRow>
-					<BCol><h1 class="calsans-text">SCAN RECIEPT</h1></BCol>
+					<BCol><h1 class="calsans-text-l">LOG OUT</h1></BCol>
 				</BRow>
 			</BContainer>
 		</div>
@@ -29,6 +66,16 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const logOutUser = () => {
+	// Clear localStorage
+	localStorage.clear();
+
+	// Redirect to login page
+	router.push("/");
+};
 </script>
 
 <style scoped>
@@ -41,7 +88,7 @@ main {
 	background-color: #5b8e7d;
 	min-height: 100vh - 60px;
 }
-.account-dashboard {
+.account-card {
 	min-height: 20vh;
 	z-index: 2;
 	background-color: #ebe3d5;
@@ -51,6 +98,48 @@ main {
 	padding: 6px;
 	box-shadow: 0px 7px 15px #2c2a29;
 }
+.account-card a {
+	text-decoration: none;
+}
+.balance-card {
+	min-height: 20vh;
+	z-index: 2;
+	background-color: #ebe3d5;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
+}
+.balance-card a {
+	text-decoration: none;
+}
+.budgets-card {
+	min-height: 20vh;
+	z-index: 2;
+	background-color: #ebe3d5;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
+}
+.budgets-card a {
+	text-decoration: none;
+}
+.logout-card {
+	height: 60px;
+	z-index: 2;
+	background-color: #776b5d;
+	color: #ebe3d5;
+	border-radius: 12px;
+	margin: 60px 20px 60px 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
+	justify-content: center;
+	display: flex;
+	cursor: pointer;
+}
 p {
 	font-family: "Darker Grotesque", sans-serif;
 	font-optical-sizing: auto;
@@ -59,39 +148,21 @@ p {
 	font-size: 1.2rem;
 	color: #2c2a29;
 }
-.ad-top {
+.ac-top {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
 }
-.ad-top h1 {
+.ac-top h1 {
 	font-size: 3rem;
 }
 
-.ad-mid {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-end;
-	height: 60px;
+.bal-top h1 {
+	font-size: 3rem;
 }
 
-.ad-bot {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-end;
-}
-
-.myBudgets-dashboard {
-	min-height: 20vh;
-
-	z-index: 2;
-	background-color: #ebe3d5;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
+.bud-top h1 {
+	font-size: 3rem;
 }
 
 p {
@@ -102,56 +173,13 @@ p {
 	font-size: 1.2rem;
 	color: #2c2a29;
 }
-.myBudgets-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	border-bottom: solid 1px #776b5d;
-}
 
-.myBudgets-mid {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: flex-end;
-	height: 60px;
-	border-bottom: solid 1px #776b5d;
-}
-
-.addTransaction-dashboard {
-	min-height: 60px;
-	z-index: 2;
-	background-color: #ebe3d5;
-	color: #2c2a29;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
-}
-
-.at-button {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.scanReciept-dashboard {
-	min-height: 60px;
-	z-index: 2;
-	background-color: #ebe3d5;
-	color: #2c2a29;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
-}
-
-.sr-button {
+.lo-button {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	place-items: center;
+	cursor: pointer;
 }
 
 .calsans-text {
@@ -159,6 +187,12 @@ p {
 	font-weight: 400;
 	font-style: normal;
 	color: #2c2a29;
+}
+.calsans-text-l {
+	font-family: "Cal Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: #ebe3d5;
 }
 
 .hugetext {

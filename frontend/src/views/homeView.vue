@@ -112,10 +112,7 @@ async function getBudgets() {
 
   const budgetInput = await response.json();
   userBudgets.value = budgetInput.userInfo;
-  console.log(
-    "this is the current received balanceInput:",
-    budgetInput.userInfo
-  );
+  console.log("these are the current fetched budgets:", budgetInput.userInfo);
 
   return userBudgets;
 }

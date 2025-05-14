@@ -20,7 +20,9 @@
             <input type="text" placeholder="New name" v-model="newUsersName" />
           </BCol>
           <BCol>
-            <button type="submit" @click="submitName">Change Name</button>
+            <button type="submit" :disabled="!newUsersName" @click="submitName">
+              Change Name
+            </button>
           </BCol>
         </BRow>
       </BContainer>
@@ -46,7 +48,9 @@
             <input type="text" placeholder="New email" v-model="newEmail" />
           </BCol>
           <BCol>
-            <button type="submit" @click="submitEmail">Change Email</button>
+            <button type="submit" :disabled="!newEmail" @click="submitEmail">
+              Change Email
+            </button>
           </BCol>
         </BRow>
       </BContainer>
@@ -178,27 +182,29 @@ const submitPassword = async () => {
 
 const submitName = async () => {
   try {
-    const currentName = qvite.loggedInUser;
-    const response = await fetch(`http://localhost:3000/api/${currentName}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ newName: newUsersName.value }),
-    });
+    const response = await fetch(
+      `http://localhost:3000/api/${qvite.loggedInUser}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newUsersName: newUsersName.value,
+          usersPassword: qvite.loggedInTotallyNotPassword,
+          usersEmail: qvite.loggedInEmail,
+        }),
+      }
+    );
 
     if (!response.ok) throw new Error("Failed to update name");
 
-    if (response.status === 204) {
-      console.log("Name updated successfully: No Content");
-    } else {
-      const result = await response.json();
-      console.log("Name updated successfully:", result);
-    }
-
-    // Update local state
+    localStorage.setItem("loggedInUser", newUsersName.value);
     qvite.loggedInUser = newUsersName.value;
+
     newUsersName.value = "";
+
+    console.log("Name updated successfully");
   } catch (error) {
     console.error("Error updating name:", error);
   }

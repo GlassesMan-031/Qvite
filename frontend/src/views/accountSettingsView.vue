@@ -77,7 +77,11 @@
             />
           </BCol>
           <BCol>
-            <button type="submit" :disabled="!isPasswordValid">
+            <button
+              type="submit"
+              :disabled="!isPasswordValid"
+              @click="submitPassword"
+            >
               Change Password
             </button>
           </BCol>
@@ -104,6 +108,40 @@ const isPasswordValid = computed(() => {
     newPass.value.length >= 7
   );
 });
+// puts newPass as oldPass in localstorage
+const submitPassword = async () => {
+  if (!isPasswordValid.value) return;
+
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/${qvite.loggedInUser}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newUsersName: qvite.loggedInUser,
+          usersPassword: newPass.value,
+          usersEmail: qvite.loggedInEmail,
+        }),
+      }
+    );
+
+    if (!response.ok) throw new Error("Failed to update password");
+
+    localStorage.setItem("loggedInTotallyNotPassword", newPass.value);
+    qvite.loggedInTotallyNotPassword = newPass.value;
+
+    oldPass.value = "";
+    newPass.value = "";
+
+    console.log("Password updated successfully");
+  } catch (error) {
+    console.error("Error updating password:", error);
+  }
+};
+
 const submitName = async () => {
   try {
     const currentName = qvite.loggedInUser;

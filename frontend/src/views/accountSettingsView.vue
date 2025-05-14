@@ -43,10 +43,10 @@
         >
         <BRow class="input-field">
           <BCol>
-            <input type="text" placeholder="New email" />
+            <input type="text" placeholder="New email" v-model="newEmail" />
           </BCol>
           <BCol>
-            <button type="submit">Change Email</button>
+            <button type="submit" @click="submitEmail">Change Email</button>
           </BCol>
         </BRow>
       </BContainer>
@@ -101,6 +101,8 @@ const qvite = useQvite();
 const newPass = ref("");
 const oldPass = ref("");
 const newUsersName = ref("");
+const newEmail = ref("");
+
 const isPasswordValid = computed(() => {
   // console.log("Checking password validity", oldPass.value, newPass.value);
   return (
@@ -108,6 +110,38 @@ const isPasswordValid = computed(() => {
     newPass.value.length >= 7
   );
 });
+
+// function for changing Email
+const submitEmail = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/${qvite.loggedInUser}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newUsersName: qvite.loggedInUser,
+          usersPassword: qvite.loggedInTotallyNotPassword,
+          usersEmail: newEmail.value,
+        }),
+      }
+    );
+
+    if (!response.ok) throw new Error("Failed to update email");
+
+    localStorage.setItem("loggedInEmail", newEmail.value);
+    qvite.loggedInEmail = newEmail.value;
+
+    newEmail.value = "";
+
+    console.log("Email updated successfully");
+  } catch (error) {
+    console.error("Error updating email:", error);
+  }
+};
+
 // puts newPass as oldPass in localstorage
 const submitPassword = async () => {
   if (!isPasswordValid.value) return;

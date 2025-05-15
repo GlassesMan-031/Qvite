@@ -2,27 +2,24 @@ const express = require("express");
 const router = express.Router();
 const transactionsController = require("../controllers/transactionsController");
 
-router.get(
-  "/api/transactions",
-  transactionsController.getTransactions
-);
+// Get all current transactions (from MongoDB)
+router.get("/api/transactions", transactionsController.getTransactions);
 
+// Get a single transaction by ID (from MongoDB)
 router.get("/api/transaction/:id", transactionsController.getTransaction);
 
-router.post(
-  "/api/transactions",
-  transactionsController.createTransaction
-);
+// Create a new transaction (save to both MongoDB + MySQL history)
+router.post("/api/transactions", transactionsController.createTransaction);
 
-router.put(
-  "/api/transactions",
-  transactionsController.updateTransaction
-);
+// Update a transaction (MongoDB, implement if you have logic)
+router.put("/api/transactions", transactionsController.updateTransaction);
 
-router.delete(
-  "/api/transactions/:id",
-  transactionsController.deleteTransaction
-);
+// Delete a transaction (from MongoDB)
+router.delete("/api/transactions/:id", transactionsController.deleteTransaction);
+
+//  NEW: Get all transaction history (from MySQL)
+router.get("/api/transaction-history", transactionsController.getTransactionHistory);
+
 
 // // Alternative  create endpoint for mongoose
 // router.post(

@@ -107,6 +107,7 @@ const handleSubmit = async () => {
     }
 
     // Login successful
+    qvite.loggedInUserId = user.usersId; // Set user ID added
     qvite.loggedInUser = user.usersName;
     qvite.loggedInEmail = user.usersEmail;
     qvite.loggedInTotallyNotPassword = user.usersPassword;

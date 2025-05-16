@@ -4,9 +4,9 @@ const connectionMySQL = require("./../connectionMySQL");
 function getAllCategories() {
   return new Promise((resolve, reject) => {
     const sql = "SELECT categoryName FROM budgetCategory ORDER BY categoryId";
-    connectionMySQL.query(sql, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
+    connectionMySQL.query(sql, (err, rows) => { 
+      if (err) reject(err); //! error - serverside
+      else resolve(rows); //? resolve if possible
     });
   });
 }
@@ -17,8 +17,8 @@ function getCategoryByName(categoryName, userId) {
     const sql =
       "SELECT * FROM budgetCategory WHERE categoryName = ? AND budgetCategoryUserId = ?";
     connectionMySQL.query(sql, [categoryName, userId], (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows[0]);
+      if (err) reject(err); //! error - serverside
+      else resolve(rows[0]); //? resolve if possible
     });
   });
 }
@@ -29,8 +29,8 @@ function createCategory(categoryName, userId) {
     const sql =
       "INSERT INTO budgetCategory (categoryName, budgetCategoryUserId) VALUES (?, ?)";
     connectionMySQL.query(sql, [categoryName, userId], (err, result) => {
-      if (err) reject(err);
-      else resolve({ categoryId: result.insertId, categoryName, userId });
+      if (err) reject(err); //! error - serverside
+      else resolve({ categoryId: result.insertId, categoryName, userId }); //? resolve if possible, look for params
     });
   });
 }
@@ -44,8 +44,8 @@ function updateCategory(categoryId, categoryName, userId) {
       sql,
       [categoryName, categoryId, userId],
       (err, result) => {
-        if (err) reject(err);
-        else resolve({ categoryId, categoryName });
+        if (err) reject(err); //! error - serverside
+        else resolve({ categoryId, categoryName }); //? resolve if possible, look for params
       }
     );
   });
@@ -57,8 +57,8 @@ function deleteCategory(categoryId, userId) {
     const sql =
       "DELETE FROM budgetCategory WHERE categoryId = ? AND budgetCategoryUserId = ?";
     connectionMySQL.query(sql, [categoryId, userId], (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) reject(err); //! error - serverside
+      else resolve(); //? resolve if possible
     });
   });
 }

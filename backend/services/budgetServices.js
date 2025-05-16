@@ -1,4 +1,3 @@
-// Import MySQL-connection
 const connectionMySQL = require('./../connectionMySQL');
 
 // Fetches all budgets from the database
@@ -8,8 +7,8 @@ function getAllBudgets() {
     return new Promise((resolve, reject) => {
       let sql = "SELECT * FROM budget";
       connectionMySQL.query(sql, (err, rows) => {
-        if (err) reject(err);
-        else resolve(rows);
+        if (err) reject(err); //! error 
+        else resolve(rows); //? resolve if possible
       });
     });
   }
@@ -24,31 +23,13 @@ function getBudgetById(id) {
     return new Promise((resolve, reject) => {
       let sql = "SELECT * FROM budget WHERE budgetId = ?";
       connectionMySQL.query(sql, [id], (err, rows) => {
-        if (err) reject(err);
-        else resolve(rows[0]);
+        if (err) reject(err); //! error 
+        else resolve(rows[0]);//? resolve if possible, look in array
       });
     });
   }
 
-/* // Create a new budget 
-function createBudget( budgetCategoryId, budgetAmount) {
-    return new Promise((resolve, reject) => {
-        let sql = `INSERT INTO budget (budgetCategoryId, budgetAmount) 
-        VALUES (?,?,?,?)`;
-        let params = [ budgetCategoryId, budgetAmount,];
-        connectionMySQL.query(sql, params, (err, result) => {
-            if(err) reject(err);
-            else resolve(result.insertId);
-        });
-    });
-} */
-    // Creates a new budget and links it to an account
-    // Input: usersName, budgetCategoryId, budgetAmount
-    // Steps:
-    // 1. Inserts budget into budget table
-    // 2. Links budget to account via accountMiddleBudget
-    // Uses transaction for atomicity
-    // Returns: Inserted budgetId
+
     // Create a new budget
     function createBudget(usersName, budgetCategoryId, budgetAmount) {
     return new Promise((resolve, reject) => {
@@ -62,7 +43,7 @@ function createBudget( budgetCategoryId, budgetAmount) {
   
         connectionMySQL.query(sqlBudget, budgetParams, (err, budgetResult) => {
           if (err) {
-            return connectionMySQL.rollback(() => reject(err));
+            return connectionMySQL.rollback(() => reject(err)); //! error 
           }
   
           const budgetId = budgetResult.insertId;
@@ -77,7 +58,7 @@ function createBudget( budgetCategoryId, budgetAmount) {
               return connectionMySQL.rollback(() => reject(err));
             }
             if (accountResult.length === 0) {
-              return connectionMySQL.rollback(() => reject(new Error("Account not found for user")));
+              return connectionMySQL.rollback(() => reject(new Error("Account not found for user"))); //! error - account not found/input
             }
   
             const accountId = accountResult[0].accountId;
@@ -89,14 +70,14 @@ function createBudget( budgetCategoryId, budgetAmount) {
   
             connectionMySQL.query(sqlMiddle, middleParams, (err) => {
               if (err) {
-                return connectionMySQL.rollback(() => reject(err));
+                return connectionMySQL.rollback(() => reject(err)); //! error 
               }
   
               connectionMySQL.commit((err) => {
                 if (err) {
-                  return connectionMySQL.rollback(() => reject(err));
+                  return connectionMySQL.rollback(() => reject(err)); //! error 
                 }
-                resolve(budgetId);
+                resolve(budgetId); //? resolve if possible, look for budgetID params
               });
             });
           });
@@ -119,8 +100,8 @@ function updateBudget(budgetCategoryId, budgetAmount, budgetUsed, budgetId) {
       let sql = "UPDATE budget SET budgetCategoryId = ?, budgetAmount = ?, budgetUsed = ? WHERE budgetId = ?";
       let params = [budgetCategoryId, budgetAmount, budgetUsed, budgetId];
       connectionMySQL.query(sql, params, (err) => {
-        if (err) reject(err);
-        else resolve("Your budget updated successfully!");
+        if (err) reject(err); //! error 
+        else resolve("Your budget updated successfully!"); //** Successfully updated  */
       });
     });
   }
@@ -132,8 +113,8 @@ function deleteBudget(id) {
     return new Promise((resolve, reject) => {
       let sql = "DELETE FROM budget WHERE budgetId = ?";
       connectionMySQL.query(sql, [id], (err) => {
-        if (err) reject(err);
-        else resolve();
+        if (err) reject(err); //! error 
+        else resolve(); //? resolve if possible
       });
     });
   }
@@ -153,8 +134,8 @@ function deleteBudget(id) {
         WHERE u.usersName = ?
       `;
       connectionMySQL.query(sql, [usersName], (err, rows) => {
-        if (err) reject(err);
-        else resolve(rows);
+        if (err) reject(err); //! error 
+        else resolve(rows); //? resolve if possible, look in rows params
       });
     });
   }

@@ -1,5 +1,4 @@
 <template>
-
   <main>
     <div class="budgets-dashboard">
       <BContainer class="ad-top">
@@ -7,9 +6,7 @@
           <BCol><h1 class="calsans-text">BUDGETS</h1></BCol>
         </BRow>
 
-        <BRow>
-          <!-- <BCol><p>todays date is 07/05</p></BCol> -->
-        </BRow>
+        <BRow> </BRow>
       </BContainer>
       <BContainer class="ad-mid">
         <BRow cols="1"></BRow>
@@ -26,8 +23,8 @@
         <Bcol><p>sek</p></Bcol>
       </BContainer>
     </div>
-    <!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
 
+    <!-- ADD BUDGET -->
     <div class="add-Budget" @click="openAddBudget" style="cursor: pointer">
       <BContainer class="ab-button">
         <BRow cols="2">
@@ -39,7 +36,6 @@
       </BContainer>
     </div>
 
-    <!-- ADD BUDGET -->
     <div v-show="addBudget" class="form-container">
       <form action="" class="add-Budget" @submit.prevent="addChosenBudget">
         <select name="category" id="" v-model="formBudget.category">
@@ -56,6 +52,7 @@
       </form>
     </div>
 
+    <!-- SHOW BUDGETS -->
     <div class="add-Budget">
       <BContainer v-for="(budget, index) in userBudgets" class="myBudgets-mid">
         <Brow>
@@ -71,7 +68,6 @@
       >
     </div>
   </main>
-
 </template>
 
 <script setup>
@@ -90,22 +86,19 @@ const formBudget = ref({
   amount: "",
 });
 
-// let printBalance = balance
+// fetch users balance
 async function getBalance() {
-
   const response = await fetch(
     `http://localhost:3000/api/account/${qvite.loggedInUser}`
   );
 
-  console.log("loggedInUser: ", qvite.loggedInUser);
-
   const balanceInput = await response.json();
-  console.log("user balance:", balanceInput);
   balance.value = balanceInput.account[0].accountBalance;
 
-	return balance;
+  return balance;
 }
 
+// get budgets created by user
 async function getBudgets() {
   const response = await fetch(
     `http://localhost:3000/api/${qvite.loggedInUser}`
@@ -118,48 +111,42 @@ async function getBudgets() {
   return userBudgets;
 }
 
+// filter out available budget categories to choose from
 async function sortAvailableBudgets() {
-  // Hämta budget kategorier
-  // Tag bort de kategorier som användaren redan har
-  // Return array med available kategorier
+  // get all categories
   const response = await fetch(`http://localhost:3000/api/budget/categories`);
 
+  const categories = await response.json();
   let selectableCategories = [];
   let allCategories = [];
   let userCategories = [];
-  const categories = await response.json();
 
+  // create array with all category-names
   for (let i = 0; i < categories.length; i++) {
     allCategories.push(categories[i].categoryName);
   }
 
+  // create array with category-names used in budget by user
   for (let i = 0; i < userBudgets.value.length; i++) {
     userCategories.push(userBudgets.value[i].categoryName);
   }
 
+  // filter out already used budget category-names
   selectableCategories = allCategories.filter(function (val) {
     return userCategories.indexOf(val) == -1;
   });
-
-  console.log(
-    "selectableCategories: ",
-    selectableCategories,
-    "userCategories: ",
-    userCategories,
-    "allCategories: ",
-    allCategories
-  );
 
   availableBudgets.value = selectableCategories;
 
   return selectableCategories;
 }
 
+// boolean controls v-show when pressing 'create new budget'
 function openAddBudget() {
   addBudget.value = !addBudget.value;
-  console.log("addBudget: ", addBudget.value);
 }
 
+// create new budget for user
 async function addChosenBudget() {
   console.log(formBudget.value);
   const catName = await fetch(`http://localhost:3000/api/budget/categories`);
@@ -170,11 +157,6 @@ async function addChosenBudget() {
   for (let i = 0; i < categories.length; i++) {
     allCategories.push(categories[i].categoryName);
   }
-
-  console.log(
-    "indexOf: ",
-    allCategories.indexOf(formBudget.value.category) + 1
-  );
 
   const response = await fetch(
     `http://localhost:3000/api/budgets/${qvite.loggedInUser}`,
@@ -194,135 +176,135 @@ async function addChosenBudget() {
 
 <style scoped>
 nav {
-	vertical-align: top;
-	background-color: #5b8e7d;
-	margin-top: 0px;
+  vertical-align: top;
+  background-color: #5b8e7d;
+  margin-top: 0px;
 }
 main {
-	background-color: #5b8e7d;
-	min-height: 100vh - 60px;
+  background-color: #5b8e7d;
+  min-height: 100vh - 60px;
 }
 .budgets-dashboard {
-	min-height: 20vh;
-	z-index: 2;
-	background-color: #ebe3d5;
-	color: #2c2a29;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
+  min-height: 20vh;
+  z-index: 2;
+  background-color: #ebe3d5;
+  color: #2c2a29;
+  border-radius: 12px;
+  margin: 20px;
+  padding: 6px;
+  box-shadow: 0px 7px 15px #2c2a29;
 }
 p {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 1.2rem;
-	color: #2c2a29;
+  font-family: "Darker Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: #2c2a29;
 }
 .ad-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .ad-top h1 {
-	font-size: 3rem;
+  font-size: 3rem;
 }
 
 .ad-mid {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-end;
-	height: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 60px;
 }
 
 .ad-bot {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .myBudgets-dashboard {
-	min-height: 20vh;
+  min-height: 20vh;
 
-	z-index: 2;
-	background-color: #ebe3d5;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
+  z-index: 2;
+  background-color: #ebe3d5;
+  border-radius: 12px;
+  margin: 20px;
+  padding: 6px;
+  box-shadow: 0px 7px 15px #2c2a29;
 }
 
 p {
-	font-family: "Darker Grotesque", sans-serif;
-	font-optical-sizing: auto;
-	font-weight: 400;
-	font-style: normal;
-	font-size: 1.2rem;
-	color: #2c2a29;
+  font-family: "Darker Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+  color: #2c2a29;
 }
 .myBudgets-top {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	border-bottom: solid 1px #776b5d;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid 1px #776b5d;
 }
 
 .myBudgets-mid {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: flex-end;
-	height: 60px;
-	border-bottom: solid 1px #776b5d;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 60px;
+  border-bottom: solid 1px #776b5d;
 }
 
 .addTransaction-dashboard {
-	min-height: 60px;
-	z-index: 2;
-	background-color: #ebe3d5;
-	color: #2c2a29;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
+  min-height: 60px;
+  z-index: 2;
+  background-color: #ebe3d5;
+  color: #2c2a29;
+  border-radius: 12px;
+  margin: 20px;
+  padding: 6px;
+  box-shadow: 0px 7px 15px #2c2a29;
 }
 
 .at-button {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .add-Budget {
-	min-height: 60px;
-	z-index: 2;
-	background-color: #ebe3d5;
-	color: #2c2a29;
-	border-radius: 12px;
-	margin: 20px;
-	padding: 6px;
-	box-shadow: 0px 7px 15px #2c2a29;
+  min-height: 60px;
+  z-index: 2;
+  background-color: #ebe3d5;
+  color: #2c2a29;
+  border-radius: 12px;
+  margin: 20px;
+  padding: 6px;
+  box-shadow: 0px 7px 15px #2c2a29;
 }
 
 .ab-button {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	place-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  place-items: center;
 }
 
 .calsans-text {
-	font-family: "Cal Sans", sans-serif;
-	font-weight: 400;
-	font-style: normal;
-	color: #2c2a29;
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #2c2a29;
 }
 
 .hugetext {
-	font-size: 4rem;
+  font-size: 4rem;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <main>
+        <!-- container for Balance card, Shows overview of userBalance -->
     <div class="balance-card">
       <BContainer class="balance-top">
         <BRow>
@@ -16,6 +17,8 @@
         >
       </BContainer>
     </div>
+
+        <!-- container for edit balance card, lets the user change their balance -->
     <div class="edit-bal-card">
       <BContainer class="edit-bal-top">
         <BRow cols="2">
@@ -61,6 +64,7 @@ const router = useRouter();
 let balance = ref(getBalance());
 const newBalance = ref("");
 
+// fetch for balance
 async function getBalance() {
   const response = await fetch(
     `http://localhost:3000/api/account/${qvite.loggedInUser}`
@@ -73,6 +77,7 @@ async function getBalance() {
   return balance;
 }
 
+// put for balance, same as fetch
 const submitBalance = async () => {
   try {
     const response = await fetch(

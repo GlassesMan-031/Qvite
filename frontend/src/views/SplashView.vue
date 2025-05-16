@@ -1,4 +1,5 @@
 <template>
+  <!-- container for background -->
   <BContainer fluid class="splash-background">
     <div
       class="header finisher-header"
@@ -23,6 +24,7 @@
           </BCol>
         </BCol>
 
+        <!-- container for username/password input -->
         <BContainer fluid class="formContainer">
           <BRow>
             <BCol cols="12" class="d-flex flex-column align-items-center">
@@ -80,6 +82,7 @@ const qvite = useQvite();
 const router = useRouter();
 const errorMessage = ref("");
 
+// function for handling submit process
 const handleSubmit = async () => {
   errorMessage.value = "";
   try {
@@ -107,6 +110,7 @@ const handleSubmit = async () => {
     }
 
     // Login successful
+    qvite.loggedInUserId = user.usersId; // Set user ID added
     qvite.loggedInUser = user.usersName;
     qvite.loggedInEmail = user.usersEmail;
     qvite.loggedInTotallyNotPassword = user.usersPassword;
@@ -179,27 +183,6 @@ onMounted(() => {
   position: relative;
 }
 
-.splash-background {
-  /* background-image: url("/bg.png"); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  display: flex;
-  place-items: center;
-  justify-content: center;
-}
-
-.splash-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.25);
-  z-index: 1;
-}
-
 body {
   background-color: #ebe3d5;
   color: #b0a695;
@@ -247,11 +230,6 @@ body {
   position: relative;
   border: none;
   cursor: pointer;
-}
-
-#login-button:disabled {
-  background-color: #a0a0a0;
-  cursor: not-allowed;
 }
 
 .bottom-links-wrapper {

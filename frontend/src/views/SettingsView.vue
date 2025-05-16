@@ -1,5 +1,6 @@
 <template>
   <main>
+    <!-- container for Account card, links to /account-settings -->
     <div class="account-card">
       <router-link to="/account-settings">
         <BContainer class="ac-top">
@@ -16,6 +17,7 @@
         </BContainer>
       </router-link>
     </div>
+    <!-- container for Balance Card, links to /balance-settings -->
     <div class="balance-card">
       <router-link to="/balance-settings">
         <BContainer class="bal-top">
@@ -33,7 +35,7 @@
         </BContainer>
       </router-link>
     </div>
-
+    <!-- container for Budget Card, links to /budget-settings, empty as of 05/16 -->
     <div class="budgets-card">
       <router-link to="/budget-settings">
         <BContainer class="bud-top">
@@ -50,7 +52,7 @@
         </BContainer>
       </router-link>
     </div>
-
+    <!-- container for Logout Card, logs out user and leads back to / -->
     <div class="logout-card" v-on:click="logOutUser">
       <BContainer class="lo-button">
         <BRow cols="2">
@@ -68,12 +70,10 @@
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
+// Clear localStorage, redirects to splashview
 const router = useRouter();
 const logOutUser = () => {
-  // Clear localStorage
   localStorage.clear();
-
-  // Redirect to login page
   router.push("/");
 };
 </script>

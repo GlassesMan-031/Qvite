@@ -1,5 +1,8 @@
 <template>
 	<main>
+		<!-- 		inside the main we have built smaller dashboards or cards where we display the users information -->
+
+		<!-- this dashboard shows the current users name and chosen balance -->
 		<div class="account-dashboard">
 			<BContainer class="ad-top">
 				<BRow cols="2">
@@ -10,7 +13,9 @@
 				</BRow>
 				<BRow>
 					<BCol></BCol>
-					<BCol><p>todays date is 07/05</p></BCol>
+					<BCol
+						><p>todays date is: {{ todaysDate }}</p></BCol
+					>
 				</BRow>
 			</BContainer>
 			<BContainer class="ad-mid">
@@ -28,7 +33,7 @@
 				<Bcol><p>sek</p></Bcol>
 			</BContainer>
 		</div>
-		<!-- BYGG IN VFOR FÖR ATT HÄMTA BUDGETS HÄR SEN  -->
+		<!-- this dashboard shows what budgets the current user has  -->
 		<div class="myBudgets-dashboard">
 			<BContainer class="myBudgets-top">
 				<BRow cols="2">
@@ -51,7 +56,7 @@
 				></BContainer
 			>
 		</div>
-
+		<!-- this is a button that leads to the add transcation view  -->
 		<div class="addTransaction-dashboard">
 			<router-link to="/transaction">
 				<BContainer class="at-button">
@@ -68,6 +73,7 @@
 			</router-link>
 		</div>
 
+		<!-- this is a button that leads to the scan reviept view -->
 		<div class="scanReciept-dashboard">
 			<router-link to="/scan">
 				<BContainer class="sr-button">
@@ -87,12 +93,22 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useQvite } from "../stores/qvite";
-// import { get } from "mongoose";
 
+// does what it says
+function getTodayDate() {
+	const today = new Date();
+	const month = String(today.getMonth() + 1).padStart(2, "0");
+	const day = String(today.getDate()).padStart(2, "0");
+	return `${month}/${day}`;
+}
+let todaysDate = getTodayDate();
+
+// our pinia store is callewd qvite and this is where we import it.
 const qvite = useQvite();
 let balance = ref(getBalance());
 let userBudgets = ref(getBudgets());
 
+// does what it says
 async function getBalance() {
 	const response = await fetch(
 		`http://localhost:3000/api/account/${qvite.loggedInUser}`
@@ -104,7 +120,7 @@ async function getBalance() {
 
 	return balance;
 }
-
+// does what it says
 async function getBudgets() {
 	const response = await fetch(
 		`http://localhost:3000/api/${qvite.loggedInUser}`
@@ -116,7 +132,6 @@ async function getBudgets() {
 
 	return userBudgets;
 }
-// getBalance();
 </script>
 
 <style scoped>

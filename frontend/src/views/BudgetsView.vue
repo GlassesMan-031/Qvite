@@ -1,4 +1,5 @@
 <template>
+
   <main>
     <div class="budgets-dashboard">
       <BContainer class="ad-top">
@@ -70,6 +71,7 @@
       >
     </div>
   </main>
+
 </template>
 
 <script setup>
@@ -90,6 +92,7 @@ const formBudget = ref({
 
 // let printBalance = balance
 async function getBalance() {
+
   const response = await fetch(
     `http://localhost:3000/api/account/${qvite.loggedInUser}`
   );
@@ -100,7 +103,7 @@ async function getBalance() {
   console.log("user balance:", balanceInput);
   balance.value = balanceInput.account[0].accountBalance;
 
-  return balance;
+	return balance;
 }
 
 async function getBudgets() {
@@ -191,135 +194,135 @@ async function addChosenBudget() {
 
 <style scoped>
 nav {
-  vertical-align: top;
-  background-color: #5b8e7d;
-  margin-top: 0px;
+	vertical-align: top;
+	background-color: #5b8e7d;
+	margin-top: 0px;
 }
 main {
-  background-color: #5b8e7d;
-  min-height: 100vh - 60px;
+	background-color: #5b8e7d;
+	min-height: 100vh - 60px;
 }
 .budgets-dashboard {
-  min-height: 20vh;
-  z-index: 2;
-  background-color: #ebe3d5;
-  color: #2c2a29;
-  border-radius: 12px;
-  margin: 20px;
-  padding: 6px;
-  box-shadow: 0px 7px 15px #2c2a29;
+	min-height: 20vh;
+	z-index: 2;
+	background-color: #ebe3d5;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
 }
 p {
-  font-family: "Darker Grotesque", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2rem;
-  color: #2c2a29;
+	font-family: "Darker Grotesque", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1.2rem;
+	color: #2c2a29;
 }
 .ad-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 .ad-top h1 {
-  font-size: 3rem;
+	font-size: 3rem;
 }
 
 .ad-mid {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-  height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
+	height: 60px;
 }
 
 .ad-bot {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-end;
 }
 
 .myBudgets-dashboard {
-  min-height: 20vh;
+	min-height: 20vh;
 
-  z-index: 2;
-  background-color: #ebe3d5;
-  border-radius: 12px;
-  margin: 20px;
-  padding: 6px;
-  box-shadow: 0px 7px 15px #2c2a29;
+	z-index: 2;
+	background-color: #ebe3d5;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
 }
 
 p {
-  font-family: "Darker Grotesque", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2rem;
-  color: #2c2a29;
+	font-family: "Darker Grotesque", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 1.2rem;
+	color: #2c2a29;
 }
 .myBudgets-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  border-bottom: solid 1px #776b5d;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: solid 1px #776b5d;
 }
 
 .myBudgets-mid {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  height: 60px;
-  border-bottom: solid 1px #776b5d;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+	height: 60px;
+	border-bottom: solid 1px #776b5d;
 }
 
 .addTransaction-dashboard {
-  min-height: 60px;
-  z-index: 2;
-  background-color: #ebe3d5;
-  color: #2c2a29;
-  border-radius: 12px;
-  margin: 20px;
-  padding: 6px;
-  box-shadow: 0px 7px 15px #2c2a29;
+	min-height: 60px;
+	z-index: 2;
+	background-color: #ebe3d5;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
 }
 
 .at-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .add-Budget {
-  min-height: 60px;
-  z-index: 2;
-  background-color: #ebe3d5;
-  color: #2c2a29;
-  border-radius: 12px;
-  margin: 20px;
-  padding: 6px;
-  box-shadow: 0px 7px 15px #2c2a29;
+	min-height: 60px;
+	z-index: 2;
+	background-color: #ebe3d5;
+	color: #2c2a29;
+	border-radius: 12px;
+	margin: 20px;
+	padding: 6px;
+	box-shadow: 0px 7px 15px #2c2a29;
 }
 
 .ab-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  place-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	place-items: center;
 }
 
 .calsans-text {
-  font-family: "Cal Sans", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  color: #2c2a29;
+	font-family: "Cal Sans", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	color: #2c2a29;
 }
 
 .hugetext {
-  font-size: 4rem;
+	font-size: 4rem;
 }
 </style>

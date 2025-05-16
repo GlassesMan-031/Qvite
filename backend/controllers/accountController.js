@@ -1,18 +1,6 @@
 const accountService = require("./../services/accountServices");
 
-//? WE DONT WANT THIS
-// Gets the available accounts (only one)
-// exports.getAccount = async (req, res) => {
-//   try {
-//     const accounts = await accountService.getAccount();
-//     res.json({ accounts });
-//   } catch (error) {
-//     return res.status(500).json({
-//       error: error.message,
-//     });
-//   }
-// };
-
+//fetch function for accounts 
 exports.getAccount = async (req, res) => {
   const { usersName } = req.params;
 
@@ -20,7 +8,7 @@ exports.getAccount = async (req, res) => {
     const account = await accountService.getAccount(usersName);
     res.json({ account });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! 500 error - server error
       error: error.message,
     });
   }
@@ -36,10 +24,10 @@ exports.createAccount = async (req, res) => {
     return res.status(201).json({
       success: true,
       error: "",
-      message: `Succesfully created an account ${usersName}, welcome to Qvite!`,
+      message: `Succesfully created an account ${usersName}, welcome to Qvite!`, //** Successful Create */
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! 500 error - server error
       success: false,
       error: error.message,
     });
@@ -54,28 +42,20 @@ exports.updateAccountBalance = async (req, res) => {
   if (!accountBalance) {
     return res.status(400).json({
       success: false,
-      error: "Please input your prefered balance",
+      error: "Please input your prefered balance", //! Error if no balance
     });
   }
-
-  //? FIX LATER
-  // if (!usersName) {
-  //   return res.status(400).json({
-  //     success: false,
-  //     error: "There's no account here, please create an account to proceed",
-  //   });
-  // }
 
   try {
     await accountService.updateAccountBalance(accountBalance, usersName);
     return res.status(201).json({
       success: true,
-      message: `Your new balance is ${accountBalance}`,
+      message: `Your new balance is ${accountBalance}`, //** Successful update */
     });
   } catch (error) {
     return res.status(500).json({
       success: false,
-      error: error.message,
+      error: error.message, //! 500 error - server error
     });
   }
 };
@@ -89,10 +69,10 @@ exports.deleteTransaction = async (req, res) => {
     return res.status(201).json({
       success: true,
       error: "",
-      message: "Transaction successfully deleted",
+      message: "Transaction successfully deleted", //** Sucessful delete */
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! 500 error - server error
       success: false,
       error: error.message,
     });

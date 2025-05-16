@@ -4,9 +4,7 @@ const budgetCategoryService = require("./../services/budgetCategoryServices");
 const budgetService = require("./../services/budgetServices");
 const connectionMySQL = require("./../connectionMySQL");
 
-// trying to create a account and budgetCategory and budget when a new user is created
 
-// define budgetCategory
 const budgetCategory = [
   "uncategorized",
   "household",
@@ -35,23 +33,23 @@ exports.createUser = async (req, res) => {
   ) {
     return res.status(400).json({
       success: false,
-      error: "Fill in all fields",
+      error: "Fill in all fields", //! error if inputfields are empty
     });
   }
 
   try {
-    // Create the user
+ 
     await userService.createUser(name, usersName, usersPassword, usersEmail);
-    // Get the user ID
+
     const userId = await new Promise((resolve, reject) => {
       const sql = `SELECT usersId FROM users WHERE usersName = ?`;
       connectionMySQL.query(sql, [usersName], (err, rows) => {
         if (err) reject(err);
-        else if (rows.length === 0) reject(new Error("User not found"));
-        else resolve(rows[0].usersId);
+        else if (rows.length === 0) reject(new Error("User not found")); //! error user not found/input correctly
+        else resolve(rows[0].usersId); //? resolve if possible
       });
     });
-    // Create an account for the new user with balance 0
+
     await accountService.createAccount(usersName, 0);
 
     // Create budgetCategoies
@@ -59,7 +57,6 @@ exports.createUser = async (req, res) => {
       await budgetCategoryService.createCategory(categoryName, userId);
     }
 
-    // Create budget for each category with 0 budget
     const categories = await budgetCategoryService.getAllCategories(userId);
     for (const category of categories) {
       await budgetService.createBudget(usersName, category.categoryId, 0);
@@ -68,8 +65,8 @@ exports.createUser = async (req, res) => {
       success: true,
       error: "",
       message: "User created successfully",
-    });
-  } catch (err) {
+    }); //** Successfully created user */
+  } catch (err) { //! errorblock - Serverside
     return res.status(500).json({
       success: false,
       error: err.message,
@@ -77,41 +74,6 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// CREATE USER Old version
-
-// exports.createUser = async (req, res) => {
-//   const { name, usersName, usersPassword, usersEmail } = req.body;
-
-//   if (
-//     !name ||
-//     name.trim().length < 1 ||
-//     !usersName ||
-//     usersName.trim().length < 1 ||
-//     !usersPassword ||
-//     usersPassword.trim().length < 1 ||
-//     !usersEmail ||
-//     usersEmail.trim().length < 1
-//   ) {
-//     return res.status(400).json({
-//       success: false,
-//       error: "Fyll i alla fält",
-//     });
-//   }
-
-//   try {
-//     await userService.createUser(name, usersName, usersPassword, usersEmail);
-//     return res.status(201).json({
-//       success: true,
-//       error: "",
-//       message: "Du har skapat ett användarkonto!",
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       error: error.message,
-//     });
-//   }
-// };
 
 // GET USERS
 exports.getUsers = async (req, res) => {
@@ -119,7 +81,7 @@ exports.getUsers = async (req, res) => {
     const users = await userService.getUsers();
     res.json({ users });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({  //! errorblock - Serverside
       error: error.message,
     });
   }
@@ -134,7 +96,7 @@ exports.getUser = async (req, res) => {
     const users = await userService.getUser(id);
     res.json({ users });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! errorblock - Serverside
       error: error.message,
     });
   }
@@ -143,13 +105,13 @@ exports.getUser = async (req, res) => {
 // GET USER INFO
 exports.getUserInfo = async (req, res) => {
   const { usersName } = req.params;
-  console.log("param" + usersName);
+  console.log("param" + usersName); //? Console log in terminal for user
 
   try {
     const userInfo = await userService.getUserInfo(usersName);
     res.json({ userInfo });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! errorblock - Serverside
       error: error.message,
     });
   }
@@ -167,12 +129,12 @@ exports.updateUser = async (req, res) => {
       usersPassword,
       usersEmail
     );
-    return res.status(201).json({
+    return res.status(201).json({ //** Successfully updated user */
       success: true,
       error: "",
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! errorblock - Serverside
       success: false,
       error: error.message,
     });
@@ -183,14 +145,14 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   const { usersName } = req.params;
 
-  if (!usersName) {
+  if (!usersName) { //! no username chosen - error
     return res.status(400).json({
       success: false,
       error: "Please select usersName to delete",
     });
   }
 
-  try {
+  try { //** Successfully deleted user - only backend*/
     await userService.deleteUser(usersName);
     return res.status(201).json({
       success: true,
@@ -198,7 +160,7 @@ exports.deleteUser = async (req, res) => {
       message: `${usersName} is no more`,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! errorblock - Serverside
       success: false,
       error: error.message,
     });
@@ -213,7 +175,7 @@ exports.checkUserExists = async (req, res) => {
     const exists = await userService.checkUserExists(usersName, usersEmail);
     return res.json({ exists });
   } catch (error) {
-    return res.status(500).json({
+    return res.status(500).json({ //! errorblock - Serverside
       error: error.message,
     });
   }

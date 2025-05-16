@@ -11,7 +11,7 @@ function getAccount(usersName) {
     `;
     let params = [usersName];
 
-    connectionMySQL.query(sql, params, (err, rows) => {
+    connectionMySQL.query(sql, params, (err, rows) => { //! error - serverside
       if (err) reject(err);
       else resolve(rows);
     });
@@ -31,9 +31,9 @@ function createAccount(usersName, accountBalance) {
     `;
     let params = [accountBalance, usersName];
 
-    connectionMySQL.query(sql, params, (err) => {
+    connectionMySQL.query(sql, params, (err) => { //! error - serverside
       if (err) reject(err);
-      else resolve();
+      else resolve(); //? resolve if possible
     });
   });
 }
@@ -49,9 +49,9 @@ function updateAccountBalance(accountBalance, usersName) {
     `;
     let params = [accountBalance, usersName];
 
-    connectionMySQL.query(sql, params, (err) => {
+    connectionMySQL.query(sql, params, (err) => { //! error - serverside
       if (err) reject(err);
-      else resolve();
+      else resolve(); //? resolve if possible
     });
   });
 }
@@ -61,9 +61,9 @@ function deleteTransaction(id) {
   return new Promise((resolve, reject) => {
     let sql = "DELETE FROM account WHERE transactionId = ?";
 
-    connectionMySQL.query(sql, [id], (err) => {
+    connectionMySQL.query(sql, [id], (err) => { //! error - serverside
       if (err) reject(err);
-      else resolve();
+      else resolve(); //? resolve if possible
     });
   });
 }

@@ -8,8 +8,8 @@ function createUser(name, usersName, usersPassword, usersEmail) {
     let params = [name, usersName, usersPassword, usersEmail];
 
     connectionMySQL.query(sql, params, (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) reject(err); //! error
+      else resolve(); //? resolve if possible
     });
   });
 }
@@ -19,22 +19,24 @@ function getUsers() {
   return new Promise((resolve, reject) => {
     let sql = "SELECT * FROM users";
     connectionMySQL.query(sql, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
+      if (err) reject(err); //! error
+      else resolve(rows); //? resolve if possible, look in params rows
     });
   });
 }
 
+// fetch single user
 function getUser() {
   return new Promise((resolve, reject) => {
     let sql = "SELECT * FROM users";
     connectionMySQL.query(sql, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
+      if (err) reject(err); //! error
+      else resolve(rows); //? resolve if possible, look in params rows
     });
   });
 }
 
+//fetch content of user, budgets, accountID, selected categories
 function getUserInfo(usersName) {
   return new Promise((resolve, reject) => {
     let sql = `SELECT *
@@ -45,8 +47,8 @@ function getUserInfo(usersName) {
       WHERE u.usersName = ?`;
     let params = [usersName];
     connectionMySQL.query(sql, params, (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows);
+      if (err) reject(err); //! error
+      else resolve(rows); //? resolve if possible, look in params rows
     });
   });
 }
@@ -61,8 +63,8 @@ function updateUser(usersName, newUsersName, usersPassword, usersEmail) {
     let params = [newUsersName, usersPassword, usersEmail, usersName];
 
     connectionMySQL.query(sql, params, (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) reject(err); //! error
+      else resolve(); //? resolve if possible
     });
   });
 }
@@ -73,8 +75,8 @@ function deleteUser(usersName) {
     let sql = "DELETE FROM users WHERE usersName = ?";
 
     connectionMySQL.query(sql, [usersName], (err) => {
-      if (err) reject(err);
-      else resolve();
+      if (err) reject(err); //! error
+      else resolve(); //? resolve if possible
     });
   });
 }
@@ -87,8 +89,8 @@ function checkUserExists(usersName, usersEmail) {
       WHERE usersName = ? OR usersEmail = ?
     `;
     connectionMySQL.query(sql, [usersName, usersEmail], (err, rows) => {
-      if (err) reject(err);
-      else resolve(rows.length > 0); // true = finns redan
+      if (err) reject(err);//! error 
+      else resolve(rows.length > 0); //* true = user already exists - false = user doesn't exists
     });
   });
 }

@@ -4,6 +4,7 @@ USE QviteDb;
 -- Users table
 CREATE TABLE users (
     usersId INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
+    name VARCHAR(100),
     usersEmail VARCHAR(100) UNIQUE,
     usersPassword VARCHAR(255) NOT NULL,
     usersName VARCHAR(50) NOT NULL UNIQUE
@@ -19,40 +20,13 @@ CREATE TABLE account (
 
 -- Budget category table
 CREATE TABLE budgetCategory (
-    categoryId INT AUTO_INCREMENT PRIMARY KEY,
-    categoryName VARCHAR(30) NOT NULL,
-    budgetCategoryUserId INT NOT NULL,
-    FOREIGN KEY (budgetCategoryUserId) REFERENCES users(usersId) ON DELETE CASCADE,
-    UNIQUE (categoryName, budgetCategoryUserId)  -- unikhet per användare
+    categoryId INT AUTO_INCREMENT PRIMARY KEY UNIQUE,
+    categoryName VARCHAR(30) NOT NULL UNIQUE
 );
 
--- INSERT INTO budgetCategory (categoryName)
--- VALUES ('uncategorized'),('household'), ('groceries'), ('transportation'), ('dining and drinks'),
---      ('leisure'), ('health and beauty'), ('shopping'), ('other');
-
--- new Insert categories linked to a single user
-
-INSERT INTO budgetCategory (categoryName, budgetCategoryUserId)
-SELECT 'uncategorized', usersId FROM users
-UNION
-SELECT 'household', usersId FROM users
-UNION
-SELECT 'groceries', usersId FROM users
-UNION
-SELECT 'transportation', usersId FROM users
-UNION
-SELECT 'dining and drinks', usersId FROM users
-UNION
-SELECT 'leisure', usersId FROM users
-UNION
-SELECT 'health and beauty', usersId FROM users
-UNION
-SELECT 'shopping', usersId FROM users
-UNION
-SELECT 'other', usersId FROM users;
-
-SELECT * FROM budgetCategory ORDER BY categoryId ASC;
-
+INSERT INTO budgetCategory (categoryName)
+VALUES ('uncategorized'),('household'), ('groceries'), ('transportation'), ('dining and drinks'),
+       ('leisure'), ('health and beauty'), ('shopping'), ('other');
 
 -- Budget table
 CREATE TABLE budget (
@@ -66,18 +40,6 @@ CREATE TABLE budget (
     FOREIGN KEY (budgetCategoryId) REFERENCES budgetCategory(categoryId) ON DELETE CASCADE
 );
 
-SELECT  * FROM budget;
-SELECT * FROM account;
--- middle table that connects budgetCategory and budget
-CREATE TABLE budgetMiddleCategory (
-    budgetCategoryId INT PRIMARY KEY ,
-    budgetCategoryBId INT ,
-    budgetCategoryCId  INT ,
-    FOREIGN KEY (budgetCategoryBId) REFERENCES budget(budgetId) ON DELETE CASCADE ,
-    FOREIGN KEY (budgetCategoryCId) REFERENCES budgetCategory(categoryId) ON DELETE CASCADE
-);
-
-
 -- connects budgetID to an account using accountId
 CREATE TABLE accountMiddleBudget (
     accountBudgetId INT PRIMARY KEY AUTO_INCREMENT,
@@ -87,12 +49,26 @@ CREATE TABLE accountMiddleBudget (
     FOREIGN KEY (accountBudgetBId) REFERENCES budget(budgetId) ON DELETE CASCADE
 );
 
+CREATE TABLE transactionHistory (
+  historyId INT AUTO_INCREMENT PRIMARY KEY,
+  transactionAccountId INT,
+  transactionNote TEXT,
+  transactionAmount DECIMAL(10, 2),
+  transactionImage TEXT,
+  transactionRecurring BOOLEAN,
+  transactionDate DATETIME,
+  transactionBudgetId INT,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- Dummy data users
 INSERT INTO users (usersName, usersPassword, usersEmail)
 VALUES ('Lisa', 'kebab', 'lisa@gmail.com'),
        ('Greger', 'Password1', 'greger@gmail.com'),
        ('Per', 'falukorv', 'per@gmail.com');
 
-
+-- Dummy data account
 INSERT INTO account (accountId, accountBalance)
 SELECT usersId, 1000
 FROM users
@@ -108,131 +84,14 @@ SELECT usersId, 3000
 FROM users
 WHERE usersName = 'Greger';
 
--- Transactions table
--- CREATE TABLE transactions (
---     transactionId INT AUTO_INCREMENT PRIMARY KEY,
---     transactionAmount INT NOT NULL,
---     transactionName VARCHAR(30) NOT NULL
--- );
-
-
-
--- Linking table between accounts and transactions (many-to-many structure)
--- CREATE TABLE account_transactions (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     accountId INT NOT NULL,
---     transactionId INT NOT NULL,
---     transactionDate DATETIME NOT NULL,
---     FOREIGN KEY (accountId) REFERENCES account(accountId) ON DELETE CASCADE,
---     FOREIGN KEY (transactionId) REFERENCES transactions(transactionId) ON DELETE CASCADE
--- );
-
-INSERT INTO budgetCategory (categoryName, budgetCategoryUserId)
-SELECT 'uncategorized', usersId FROM users
-UNION
-SELECT 'household', usersId FROM users
-UNION
-SELECT 'groceries', usersId FROM users
-UNION
-SELECT 'transportation', usersId FROM users
-UNION
-SELECT 'dining and drinks', usersId FROM users
-UNION
-SELECT 'leisure', usersId FROM users
-UNION
-SELECT 'health and beauty', usersId FROM users
-UNION
-SELECT 'shopping', usersId FROM users
-UNION
-SELECT 'other', usersId FROM users;
-
-SELECT * FROM budgetCategory ORDER BY categoryId ASC;
-
-SELECT * FROM account WHERE accountId = 1;
-
-SELECT * FROM users;
-
-SELECT * FROM account;
-
---
-
--- SEE EVERYTHING
-SELECT * FROM users
-INNER JOIN account a ON users.usersId = a.accountId;
-
--- CREATE ACCOUNT
-INSERT INTO account (accountId, accountBalance)
-SELECT usersId, 1000
-FROM users
-WHERE usersName = 'Lisa';
-
--- UPDATE ACCOUNT BALANCE MANUALLY
-UPDATE account
-JOIN users ON account.accountId = users.usersId
-SET account.accountBalance = 1500
-WHERE users.usersName = 'LisaLotta';
-
--- UPDATE TRANSACTION ARRAY
-UPDATE account
-JOIN users ON account.accountId = users.usersId
-SET account.accountTransactionId = [1, 2, 3]
-WHERE users.usersName = 'Bengt';
-
-SELECT account.accountBalance
-FROM account
-JOIN users ON account.accountId = users.usersId
-WHERE users.usersName = 'Greger';
-
--- INSERT INTO account (accountId, accountBalance)
-    SELECT usersId,
-    FROM users
-    WHERE usersName = 'Greger';
-
--- find which account that has which budget and what amount the budget has.
-
-SELECT
-  users.usersName,
-  aMB.accountBudgetBId,
-  b.budgetAmount
-FROM users
-INNER JOIN account ON account.accountId = users.usersId
-INNER JOIN accountMiddleBudget aMB ON account.accountId = aMB.accountBudgetAId
-INNER JOIN budget b ON aMB.accountBudgetBId = b.budgetId
-WHERE users.usersId = 3;
-
-
-SELECT * FROM users
-INNER JOIN account a ON users.usersId = a.accountId;
-
-SELECT *
-FROM account
-LEFT JOIN users u ON u.usersId = account.accountId;
-
-SELECT *
-FROM accountMiddleBudget;
-
-SELECT *
-FROM account;
-
-
-SELECT *
-FROM budgetMiddleCategory;
-
-SELECT *
-FROM budget;
-
-SELECT *
-FROM budgetCategory
-ORDER BY budgetCategory.categoryId ASC;
-
-
-
-
-
-
-
-
-
-
-DROP DATABASE IF EXISTS QviteDb;
-
+-- Dummy data budget
+INSERT INTO budget(budgetCategoryId, budgetAmount, budgetUsed, budgetAccountId)
+VALUES (3, 1000, 200, 3),
+       (2, 2000, 0, 3),
+       (1, 3000, 23, 3),
+       (4, 4000, 560, 2),
+       (5, 5000, 200, 2),
+       (6, 6000, 400, 2),
+        (2, 200, 20, 1),
+       (8, 300, 30, 1),
+       (9, 400, 40, 1);

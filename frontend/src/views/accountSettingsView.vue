@@ -1,5 +1,6 @@
 <template>
   <main>
+        <!-- container for Name card, lets user changes name -->
     <div class="name-card">
       <BContainer class="name-top">
         <BRow>
@@ -27,6 +28,8 @@
         </BRow>
       </BContainer>
     </div>
+
+            <!-- container for Email card, lets user changes Email -->
     <div class="email-card">
       <BContainer class="email-top">
         <BRow cols="2">
@@ -56,6 +59,7 @@
       </BContainer>
     </div>
 
+            <!-- container for Password card, lets user changes Password -->
     <div class="password-card">
       <BContainer class="pw-top">
         <BRow cols="2">
@@ -101,12 +105,12 @@ import { useRouter } from "vue-router";
 import { useQvite } from "../stores/qvite";
 const qvite = useQvite();
 
-// function to compare old password and new password to enable button
 const newPass = ref("");
 const oldPass = ref("");
 const newUsersName = ref("");
 const newEmail = ref("");
 
+// function to compare old password and new password to enable button
 const isPasswordValid = computed(() => {
   // console.log("Checking password validity", oldPass.value, newPass.value);
   return (
@@ -115,7 +119,7 @@ const isPasswordValid = computed(() => {
   );
 });
 
-// function for changing Email
+// function for changing Email in pinia and localstorage 
 const submitEmail = async () => {
   try {
     const response = await fetch(
@@ -146,7 +150,7 @@ const submitEmail = async () => {
   }
 };
 
-// puts newPass as oldPass in localstorage
+// puts newPass as oldPass in localstorage and pinia
 const submitPassword = async () => {
   if (!isPasswordValid.value) return;
 
@@ -180,6 +184,7 @@ const submitPassword = async () => {
   }
 };
 
+// function for setting new name in both pinia and localstorage
 const submitName = async () => {
   try {
     const response = await fetch(

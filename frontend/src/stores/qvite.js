@@ -4,7 +4,7 @@ import { useLocalStorage } from "@vueuse/core";
 export const useQvite = defineStore("qvite", {
   state: () => ({
     // set variables here
-
+    loggedInUserId: useLocalStorage("loggedInUserId",{}),
     loggedInUser: useLocalStorage("loggedInUser", {}),
     loggedInEmail: useLocalStorage("loggedInEmail", {}),
     loggedInTotallyNotPassword: useLocalStorage(
